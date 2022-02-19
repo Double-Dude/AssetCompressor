@@ -1,0 +1,24 @@
+PODS:
+  - Alamofire (5.5.0)
+  - ffmpeg-kit-ios-full (4.5.1)
+  - ffmpeg-kit-macos-full (4.5.1)
+
+DEPENDENCIES:
+  - Alamofire (~> 5.5)
+  - ffmpeg-kit-ios-full (~> 4.5.1)
+  - ffmpeg-kit-macos-full (~> 4.5.1)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - ffmpeg-kit-ios-full
+    - ffmpeg-kit-macos-full
+
+SPEC CHECKSUMS:
+  Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
+  ffmpeg-kit-ios-full: 1e918caa885a00501ec1606c68a874d07d681705
+  ffmpeg-kit-macos-full: 8bf0ab8d570a487f9da07d564f6e49bd6f008bac
+
+PODFILE CHECKSUM: 26647075f8e7189f1f20039553946cb99b978ef2
+
+COCOAPODS: 1.11.2

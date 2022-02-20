@@ -11,6 +11,8 @@
 		38302B8227C08A3500EA55E4 /* FFmpegCommandBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38302B8027C08A3500EA55E4 /* FFmpegCommandBuilder.swift */; };
 		38302B8427C09ED600EA55E4 /* FFmpegCommandFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38302B8327C09ED600EA55E4 /* FFmpegCommandFactory.swift */; };
 		38302B8527C09ED600EA55E4 /* FFmpegCommandFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38302B8327C09ED600EA55E4 /* FFmpegCommandFactory.swift */; };
+		38302B8727C1B50B00EA55E4 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38302B8627C1B50B00EA55E4 /* URL+Extensions.swift */; };
+		38302B8827C1B50B00EA55E4 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38302B8627C1B50B00EA55E4 /* URL+Extensions.swift */; };
 		383E1AD827BE442600E06B99 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383E1AD727BE442600E06B99 /* Tests_iOS.swift */; };
 		383E1ADA27BE442600E06B99 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383E1AD927BE442600E06B99 /* Tests_iOSLaunchTests.swift */; };
 		383E1AE427BE442600E06B99 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383E1AE327BE442600E06B99 /* Tests_macOS.swift */; };
@@ -52,6 +54,7 @@
 		3794867F81F5D991AD8B1591 /* Pods_AssetCompressor__iOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AssetCompressor__iOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		38302B8027C08A3500EA55E4 /* FFmpegCommandBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFmpegCommandBuilder.swift; sourceTree = "<group>"; };
 		38302B8327C09ED600EA55E4 /* FFmpegCommandFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFmpegCommandFactory.swift; sourceTree = "<group>"; };
+		38302B8627C1B50B00EA55E4 /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		383E1ABF27BE442500E06B99 /* AssetCompressorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCompressorApp.swift; sourceTree = "<group>"; };
 		383E1AC027BE442500E06B99 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		383E1AC127BE442600E06B99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -143,6 +146,7 @@
 				38E68F1F27C047E800112A4B /* FFmpegVideoCompressor.swift */,
 				38302B8027C08A3500EA55E4 /* FFmpegCommandBuilder.swift */,
 				38302B8327C09ED600EA55E4 /* FFmpegCommandFactory.swift */,
+				38302B8627C1B50B00EA55E4 /* URL+Extensions.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -440,6 +444,7 @@
 				38E68F1D27C0450A00112A4B /* VideoCompressor.swift in Sources */,
 				38302B8127C08A3500EA55E4 /* FFmpegCommandBuilder.swift in Sources */,
 				38302B8427C09ED600EA55E4 /* FFmpegCommandFactory.swift in Sources */,
+				38302B8727C1B50B00EA55E4 /* URL+Extensions.swift in Sources */,
 				383E1AE927BE442600E06B99 /* ContentView.swift in Sources */,
 				38E68F1A27C0445A00112A4B /* MainView.swift in Sources */,
 				383E1AE727BE442600E06B99 /* AssetCompressorApp.swift in Sources */,
@@ -454,6 +459,7 @@
 				38E68F1E27C0450A00112A4B /* VideoCompressor.swift in Sources */,
 				38302B8227C08A3500EA55E4 /* FFmpegCommandBuilder.swift in Sources */,
 				38302B8527C09ED600EA55E4 /* FFmpegCommandFactory.swift in Sources */,
+				38302B8827C1B50B00EA55E4 /* URL+Extensions.swift in Sources */,
 				383E1AEA27BE442600E06B99 /* ContentView.swift in Sources */,
 				38E68F1B27C0445A00112A4B /* MainView.swift in Sources */,
 				383E1AE827BE442600E06B99 /* AssetCompressorApp.swift in Sources */,

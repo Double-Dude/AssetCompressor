@@ -22,12 +22,6 @@ struct ImagePicker: UIViewControllerRepresentable {
         let picker = PHPickerViewController(configuration: configuration)
         picker.delegate = context.coordinator
         return picker
-//        let imagePicker = UIImagePickerController()
-//        imagePicker.allowsEditing = false
-//        imagePicker.sourceType = sourceType
-//        imagePicker.mediaTypes =  [kUTTypeMovie as String]
-//        imagePicker.delegate = context.coordinator
-//        return imagePicker
     }
  
     func makeCoordinator() -> Coordinator {
@@ -46,44 +40,32 @@ struct ImagePicker: UIViewControllerRepresentable {
 
         func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
             guard let provider = results.first?.itemProvider else { return }
-            
-            provider.loadFileRepresentation(forTypeIdentifier: UTType.movie.identifier) { [weak self] url, error in
-                debugPrint("URL: \(url?.path)")
-                let temp = FileManager.default.temporaryDirectory.appendingPathComponent("picked_video.mp4")
-                if(FileManager.default.fileExists(atPath: temp.path)) {
-                    try! FileManager.default.removeItem(at: temp)
+
+            provider.loadFileRepresentation(forTypeIdentifier: UTType.movie.identifier) { url, error in
+                provider.loadInPlaceFileRepresentation(forTypeIdentifier: UTType.movie.identifier) { url, _, _ in
+
+                    DispatchQueue.main.async { [weak self] in
+                        let temp = FileManager.default.temporaryDirectory.appendingPathComponent("cleanup-on-launch")
+                        try! FileManager.default.createDirectory(at: temp, withIntermediateDirectories: true, attributes: nil)
+                        let fileUrl = temp.appendingPathComponent(UUID.init().uuidString+".mp4")
+                        try! FileManager.default.moveItem(at: url!, to: fileUrl)
+                        self?.parent.onImagePicked(fileUrl)
+                        self?.parent.presentationMode.wrappedValue.dismiss()
+                    }
+                   
                 }
-                try! FileManager.default.moveItem(at: url!, to: temp)
-                self?.parent.onImagePicked(temp)
-            }
                     
+            }
         }
+
+        private var url1: URL?
+        private var time: Timer?
         
         deinit {
             debugPrint("Deinit")
         }
+        
     }
-    
-//    final class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-//
-//        var parent: ImagePicker
-//
-//        init(_ parent: ImagePicker) {
-//            self.parent = parent
-//        }
-//
-//        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-//
-//            let imageURL = info[UIImagePickerController.InfoKey.mediaURL] as! URL
-//            debugPrint("Image picked: \(imageURL.path)")
-//
-//            parent.onImagePicked(imageURL)
-//            parent.presentationMode.wrappedValue.dismiss()
-//        }
-//        deinit {
-//            debugPrint("Deinit")
-//        }
-//    }
 }
 struct MainView: View {
     

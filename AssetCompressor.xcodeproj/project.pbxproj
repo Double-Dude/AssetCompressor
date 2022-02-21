@@ -7,12 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		382EDD1827C1D5A0001D9D0A /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382EDD1727C1D5A0001D9D0A /* Color+Extensions.swift */; };
+		382EDD1927C1D5A0001D9D0A /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382EDD1727C1D5A0001D9D0A /* Color+Extensions.swift */; };
+		382EDD1B27C249EF001D9D0A /* SwiftUITestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382EDD1A27C249EF001D9D0A /* SwiftUITestView.swift */; };
+		382EDD1C27C249EF001D9D0A /* SwiftUITestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382EDD1A27C249EF001D9D0A /* SwiftUITestView.swift */; };
+		382EDD1E27C3658F001D9D0A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382EDD1D27C3658F001D9D0A /* ImagePicker.swift */; };
+		382EDD1F27C3658F001D9D0A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382EDD1D27C3658F001D9D0A /* ImagePicker.swift */; };
+		382EDD2127C368D7001D9D0A /* MainMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382EDD2027C368D7001D9D0A /* MainMenuItem.swift */; };
+		382EDD2227C368D7001D9D0A /* MainMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382EDD2027C368D7001D9D0A /* MainMenuItem.swift */; };
+		382EDD2427C3712D001D9D0A /* SwiftUIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382EDD2327C3712D001D9D0A /* SwiftUIView+Extensions.swift */; };
+		382EDD2527C3712D001D9D0A /* SwiftUIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382EDD2327C3712D001D9D0A /* SwiftUIView+Extensions.swift */; };
 		38302B8127C08A3500EA55E4 /* FFmpegCommandBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38302B8027C08A3500EA55E4 /* FFmpegCommandBuilder.swift */; };
 		38302B8227C08A3500EA55E4 /* FFmpegCommandBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38302B8027C08A3500EA55E4 /* FFmpegCommandBuilder.swift */; };
 		38302B8427C09ED600EA55E4 /* FFmpegCommandFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38302B8327C09ED600EA55E4 /* FFmpegCommandFactory.swift */; };
 		38302B8527C09ED600EA55E4 /* FFmpegCommandFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38302B8327C09ED600EA55E4 /* FFmpegCommandFactory.swift */; };
-		38302B8727C1B50B00EA55E4 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38302B8627C1B50B00EA55E4 /* URL+Extensions.swift */; };
-		38302B8827C1B50B00EA55E4 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38302B8627C1B50B00EA55E4 /* URL+Extensions.swift */; };
 		383E1AD827BE442600E06B99 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383E1AD727BE442600E06B99 /* Tests_iOS.swift */; };
 		383E1ADA27BE442600E06B99 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383E1AD927BE442600E06B99 /* Tests_iOSLaunchTests.swift */; };
 		383E1AE427BE442600E06B99 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383E1AE327BE442600E06B99 /* Tests_macOS.swift */; };
@@ -52,9 +60,13 @@
 
 /* Begin PBXFileReference section */
 		3794867F81F5D991AD8B1591 /* Pods_AssetCompressor__iOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AssetCompressor__iOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		382EDD1727C1D5A0001D9D0A /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		382EDD1A27C249EF001D9D0A /* SwiftUITestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUITestView.swift; sourceTree = "<group>"; };
+		382EDD1D27C3658F001D9D0A /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		382EDD2027C368D7001D9D0A /* MainMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuItem.swift; sourceTree = "<group>"; };
+		382EDD2327C3712D001D9D0A /* SwiftUIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUIView+Extensions.swift"; sourceTree = "<group>"; };
 		38302B8027C08A3500EA55E4 /* FFmpegCommandBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFmpegCommandBuilder.swift; sourceTree = "<group>"; };
 		38302B8327C09ED600EA55E4 /* FFmpegCommandFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFmpegCommandFactory.swift; sourceTree = "<group>"; };
-		38302B8627C1B50B00EA55E4 /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		383E1ABF27BE442500E06B99 /* AssetCompressorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCompressorApp.swift; sourceTree = "<group>"; };
 		383E1AC027BE442500E06B99 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		383E1AC127BE442600E06B99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -146,7 +158,11 @@
 				38E68F1F27C047E800112A4B /* FFmpegVideoCompressor.swift */,
 				38302B8027C08A3500EA55E4 /* FFmpegCommandBuilder.swift */,
 				38302B8327C09ED600EA55E4 /* FFmpegCommandFactory.swift */,
-				38302B8627C1B50B00EA55E4 /* URL+Extensions.swift */,
+				382EDD1727C1D5A0001D9D0A /* Color+Extensions.swift */,
+				382EDD1A27C249EF001D9D0A /* SwiftUITestView.swift */,
+				382EDD1D27C3658F001D9D0A /* ImagePicker.swift */,
+				382EDD2027C368D7001D9D0A /* MainMenuItem.swift */,
+				382EDD2327C3712D001D9D0A /* SwiftUIView+Extensions.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -443,10 +459,14 @@
 				38E68F2027C047E800112A4B /* FFmpegVideoCompressor.swift in Sources */,
 				38E68F1D27C0450A00112A4B /* VideoCompressor.swift in Sources */,
 				38302B8127C08A3500EA55E4 /* FFmpegCommandBuilder.swift in Sources */,
+				382EDD1827C1D5A0001D9D0A /* Color+Extensions.swift in Sources */,
 				38302B8427C09ED600EA55E4 /* FFmpegCommandFactory.swift in Sources */,
-				38302B8727C1B50B00EA55E4 /* URL+Extensions.swift in Sources */,
+				382EDD2127C368D7001D9D0A /* MainMenuItem.swift in Sources */,
 				383E1AE927BE442600E06B99 /* ContentView.swift in Sources */,
 				38E68F1A27C0445A00112A4B /* MainView.swift in Sources */,
+				382EDD2427C3712D001D9D0A /* SwiftUIView+Extensions.swift in Sources */,
+				382EDD1E27C3658F001D9D0A /* ImagePicker.swift in Sources */,
+				382EDD1B27C249EF001D9D0A /* SwiftUITestView.swift in Sources */,
 				383E1AE727BE442600E06B99 /* AssetCompressorApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -458,10 +478,14 @@
 				38E68F2127C047E800112A4B /* FFmpegVideoCompressor.swift in Sources */,
 				38E68F1E27C0450A00112A4B /* VideoCompressor.swift in Sources */,
 				38302B8227C08A3500EA55E4 /* FFmpegCommandBuilder.swift in Sources */,
+				382EDD1927C1D5A0001D9D0A /* Color+Extensions.swift in Sources */,
 				38302B8527C09ED600EA55E4 /* FFmpegCommandFactory.swift in Sources */,
-				38302B8827C1B50B00EA55E4 /* URL+Extensions.swift in Sources */,
+				382EDD2227C368D7001D9D0A /* MainMenuItem.swift in Sources */,
 				383E1AEA27BE442600E06B99 /* ContentView.swift in Sources */,
 				38E68F1B27C0445A00112A4B /* MainView.swift in Sources */,
+				382EDD2527C3712D001D9D0A /* SwiftUIView+Extensions.swift in Sources */,
+				382EDD1F27C3658F001D9D0A /* ImagePicker.swift in Sources */,
+				382EDD1C27C249EF001D9D0A /* SwiftUITestView.swift in Sources */,
 				383E1AE827BE442600E06B99 /* AssetCompressorApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -620,6 +644,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

@@ -6,80 +6,99 @@
 //
 
 import SwiftUI
-import MobileCoreServices
-import PhotosUI
 
-
-struct ImagePicker: UIViewControllerRepresentable {
-    let onImagePicked: (URL) -> Void
-    @Environment(\.presentationMode) var presentationMode
-     
-    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> PHPickerViewController {
- 
-        var configuration = PHPickerConfiguration()
-        configuration.selectionLimit = 1
-        configuration.filter = .videos
-        let picker = PHPickerViewController(configuration: configuration)
-        picker.delegate = context.coordinator
-        return picker
-    }
- 
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-    
-    func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {
-        
-    }
-    final class Coordinator: NSObject, PHPickerViewControllerDelegate {
-        var parent: ImagePicker
-        
-        init(_ parent: ImagePicker) {
-            self.parent = parent
-        }
-
-        func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-            guard let provider = results.first?.itemProvider else { return }
-
-            provider.loadFileRepresentation(forTypeIdentifier: UTType.movie.identifier) { url, error in
-                provider.loadInPlaceFileRepresentation(forTypeIdentifier: UTType.movie.identifier) { url, _, _ in
-
-                    DispatchQueue.main.async { [weak self] in
-                        let temp = FileManager.default.temporaryDirectory.appendingPathComponent("cleanup-on-launch")
-                        try! FileManager.default.createDirectory(at: temp, withIntermediateDirectories: true, attributes: nil)
-                        let fileUrl = temp.appendingPathComponent(UUID.init().uuidString+".mp4")
-                        try! FileManager.default.moveItem(at: url!, to: fileUrl)
-                        self?.parent.onImagePicked(fileUrl)
-                        self?.parent.presentationMode.wrappedValue.dismiss()
-                    }
-                   
-                }
-                    
-            }
-        }
-
-        private var url1: URL?
-        private var time: Timer?
-        
-        deinit {
-            debugPrint("Deinit")
-        }
-        
-    }
-}
 struct MainView: View {
-    
+    @Namespace private var namespace
     @State private var isShowingPhotoLibrary = false
+    @State private var selectedID: String?
+    @State private var rotate = false
+
+    private let gridItemLayout = [
+        GridItem(spacing: 16),
+        GridItem(),
+    ]
     
     var body: some View {
-        VStack {
-            Button("Compress") { isShowingPhotoLibrary = true }.padding()
+        if(selectedID != nil) {
+            ZStack {
+                Color.fromHex(0xF2F3F8)
+                    .matchedGeometryEffect(id: selectedID!, in: namespace)
+                    .rotationEffect(.degrees(rotate ? 0 : -180))
+            }
+            .ignoresSafeArea()
+            .onAppear {
+                withAnimation(Animation.easeIn(duration: 0.3)) {
+                        self.rotate.toggle()
+                    }
+            }
+//            createa(id: selectedID!)
+        } else {
+            VStack {
+                LazyVGrid(columns: gridItemLayout, spacing: 16, content: {
+                    createMenuItem("1")
+                    createMenuItem("2")
+                    createMenuItem("3")
+                    createMenuItem("4")
+                })
+                .padding()
+                .sheet(isPresented: $isShowingPhotoLibrary) {
+                    #if os(iOS)
+                    ImagePicker(onImagePicked: { url in
+                    onVideoSelected(videoURL: url) })
+                    #endif
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(LinearGradient(gradient: Gradient(colors: [.fromHex(0xFF48C6EF), .fromHex(0xFF6F86D6)]), startPoint: .leading, endPoint: .trailing))
+            .ignoresSafeArea()
         }
-        .sheet(isPresented: $isShowingPhotoLibrary) {
-            ImagePicker(onImagePicked: { url in
-                onVideoSelected(videoURL: url) })
+    }
+
+    private func createa(id: String) -> some View {
+        ZStack {
+            Color.green
+                .matchedGeometryEffect(id: id, in: namespace)
+                .frame(width: 500, height: 500, alignment: .leading)
+                .rotationEffect(.degrees(rotate ? 360 : 0))
+
+//                Text("Test1")
+//                    .matchedGeometryEffect(id: "title", in: namespace)
+//                    .frame(width: 500, height: 500, alignment: .center)
+//                    .rotationEffect(.degrees(rotate ? 180 : 0))
+//                    .background(
+//                        Color.red
+//                    )
+//                    .animation(.easeInOut(duration: 3).delay(3), value: rotate)
         }
-       
+        .onAppear {
+            debugPrint(String(selectedID!))
+
+            withAnimation(Animation.easeOut(duration: 0.5)) {
+                    self.rotate.toggle()
+                }
+        }
+    }
+    
+    private func createMenuItem(_ id: String) -> some View {
+        return MainMenuItem(
+            id: id,
+            namespace: namespace,
+            title: "Quick Play",
+            image: Image(systemName: "video"),
+            onTapped: {
+                withAnimation(Animation.linear(duration: 0.5)) {
+                    selectedID = id
+                }
+            }
+        )
+        .frame(
+            minWidth: 0,
+            maxWidth: .infinity,
+            minHeight: 0,
+            maxHeight: .infinity,
+            alignment: .topLeading
+        )
+        
     }
     
     private func onVideoSelected(videoURL: URL) {
@@ -103,24 +122,65 @@ struct MainView: View {
                     debugPrint("Failed \(error.localizedDescription)")
                }
         }
-       
-
     }
     
     private func onselectPhotoFromMacOS() {
     }
 }
 
-class TestClass {
-    func test() async {
-        Task.init() {
-            debugPrint("Is MainThread3: \(Thread.isMainThread)")
-        }
+struct MainView_Previews: PreviewProvider {
+    static var previews: some View {
+        MainView()
     }
 }
 
-struct MainView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
+
+//Color
+//                    .white
+//                    .aspectRatio(1, contentMode: .fit)
+//                    //.frame(height: 100)
+//                    .overlay(
+//                        Button("Compress") { isShowingPhotoLibrary = true }
+//                    )
+//                    .cornerRadius(30)
+//                    //.contentShape(RoundedRectangle(cornerRadius: 10.0))
+//                Button("Compress") { isShowingPhotoLibrary = true }.padding()
+//                Button("Compress") { isShowingPhotoLibrary = true }.padding()
+//                HStack {
+//                    Button("Compress") { isShowingPhotoLibrary = true }
+//                }
+//                //.frame(minWidth: .infinity, minHeight: .infinity)
+//                .background(Color.white)
+//
+//                Button(action: {
+//                           print("Round Action")
+//                           }) {
+//                           Text("Press")
+//                               .foregroundColor(Color.green)
+//                               .background(Color.white)
+//                               .clipShape(Circle())
+////                               .aspectRatio(1, contentMode: .fill)
+//                           }
+////                           .aspectRatio(1, contentMode: .fill)
+//                           .frame(maxWidth: .infinity)
+//
+//                Button("even longer Text") {
+//                    print("x")
+//                }
+//                .frame(maxWidth: .infinity)
+//
+//                Button(action: { print("") }) {
+//                    VStack {
+//                        Image(systemName: "video")
+//                            .frame()
+//                    Text("item")
+//                    }
+//                               }    .frame(maxWidth: .infinity, maxHeight: .infinity)
+//                    .contentShape(Rectangle())
+//                    .aspectRatio(1, contentMode: .fill)
+//                    .background(Color.white)
+//
+//                let tap = DragGesture(minimumDistance: 0).onChanged { _ in
+//                    print("onPressed")
+//
+//                }

@@ -6,7 +6,6 @@
 //
 
 import ffmpegkit
-import Alamofire
 
 class FFmpegVideoCompressor : VideoCompressor {
     let ffmpegCommandFactory: FFmpegCommandFactory

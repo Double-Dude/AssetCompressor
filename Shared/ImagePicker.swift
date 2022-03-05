@@ -11,7 +11,7 @@ import SwiftUI
 import PhotosUI
 
 struct ImagePicker: UIViewControllerRepresentable {
-    let onImagePicked: (URL) -> Void
+    let onCompletion: (URL?) -> Void
     @Environment(\.presentationMode) var presentationMode
      
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> PHPickerViewController {
@@ -43,20 +43,38 @@ struct ImagePicker: UIViewControllerRepresentable {
                 return
             }
 
-            provider.loadFileRepresentation(forTypeIdentifier: UTType.movie.identifier) { url, error in
-                provider.loadInPlaceFileRepresentation(forTypeIdentifier: UTType.movie.identifier) { url, _, _ in
-                    DispatchQueue.main.async { [weak self] in
-                        let temp = FileManager.default.temporaryDirectory.appendingPathComponent("cleanup-on-launch")
-                        try! FileManager.default.createDirectory(at: temp, withIntermediateDirectories: true, attributes: nil)
-                        let fileUrl = temp.appendingPathComponent(UUID.init().uuidString+".mp4")
-                        try! FileManager.default.moveItem(at: url!, to: fileUrl)
-                        self?.parent.onImagePicked(fileUrl)
-                        self?.parent.presentationMode.wrappedValue.dismiss()
-                    }
-                }
+            provider.loadFileRepresentation(forTypeIdentifier: UTType.movie.identifier) { [weak self] url, error in
+                debugPrint("Start: \(Date.init())")
+                let temp = FileManager.default.temporaryDirectory.appendingPathComponent("cleanup-on-launch")
+                try! FileManager.default.createDirectory(at: temp, withIntermediateDirectories: true, attributes: nil)
+                let fileUrl = temp.appendingPathComponent(UUID.init().uuidString+".mp4")
+                try! FileManager.default.moveItem(at: url!, to: fileUrl)
+                debugPrint("Stop: \(Date.init())")
+                self?.parent.onCompletion(fileUrl)
+//                self?.parent.presentationMode.wrappedValue.dismiss()
+//                DispatchQueue.main.async { [weak self] in
+//
+//                }
+//                provider.loadInPlaceFileRepresentation(forTypeIdentifier: UTType.movie.identifier) { url, _, _ in
+//                    provider.loadPreviewImage() { (data, error) in
+//                        if let image = data as? UIImage {
+//                            debugPrint(image)
+//                        }
+//                    }
+//                    DispatchQueue.main.async { [weak self] in
+//                        let temp = FileManager.default.temporaryDirectory.appendingPathComponent("cleanup-on-launch")
+//                        try! FileManager.default.createDirectory(at: temp, withIntermediateDirectories: true, attributes: nil)
+//                        let fileUrl = temp.appendingPathComponent(UUID.init().uuidString+".mp4")
+//                        try! FileManager.default.moveItem(at: url!, to: fileUrl)
+//                        self?.parent.onCompletion(fileUrl)
+//                        self?.parent.presentationMode.wrappedValue.dismiss()
+//                    }
+//                }
                     
             }
         }
+        
+        
         
         
     }

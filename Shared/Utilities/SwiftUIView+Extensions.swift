@@ -19,7 +19,7 @@ private struct OnPressedGestureModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .simultaneousGesture(DragGesture(minimumDistance: 0)
+            .simultaneousGesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
                 .onChanged { _ in
                     if !self.tapped {
                         self.tapped = true

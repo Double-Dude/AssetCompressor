@@ -22,6 +22,7 @@ enum FFmpegVideoCompressorError: Error {
     case unexpectedError(String)
 }
 
-protocol VideoCompressor {
+protocol VideoEditor {
+    func getMetadata(_ url: URL) async -> VideoMetadata
     func execute(videoCompressionRequest: VideoCompressionRequest) async -> Result<URL, FFmpegVideoCompressorError>
 }

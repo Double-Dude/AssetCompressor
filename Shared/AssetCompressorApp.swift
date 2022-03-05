@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 @main
 struct AssetCompressorApp: App {
     var body: some Scene {

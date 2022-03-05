@@ -77,25 +77,6 @@ struct MainView: View {
         withAnimation(Animation.easeOut(duration: 0.5)) {
             selectedID = "1"
         }
-//        let tmpURL = FileManager.default.temporaryDirectory.appendingPathComponent("Test.mp4")
-//        debugPrint(tmpURL)
-//        let request = VideoCompressionRequest(
-//            bitRate: 1096,
-//            playbackSpeed: 2,
-//            outputFps: 17,
-//            outputWidth: 640,
-//            outputHeight: 360,
-//            inputFilePaths: [videoURL],
-//            outputFilePath: tmpURL)
-//        Task.init {
-//            let result = await FFmpegVideoCompressor(ffmpegCommandFactory: FFmpegCommandFactory()).execute(videoCompressionRequest: request)
-//            switch result {
-//               case .success(let url):
-//                debugPrint("Completed \(url.path)")
-//               case .failure(let error):
-//                    debugPrint("Failed \(error.localizedDescription)")
-//               }
-//        }
     }
     
     private func onselectPhotoFromMacOS() {
@@ -107,54 +88,3 @@ struct MainView_Previews: PreviewProvider {
         MainView()
     }
 }
-
-
-//Color
-//                    .white
-//                    .aspectRatio(1, contentMode: .fit)
-//                    //.frame(height: 100)
-//                    .overlay(
-//                        Button("Compress") { isShowingPhotoLibrary = true }
-//                    )
-//                    .cornerRadius(30)
-//                    //.contentShape(RoundedRectangle(cornerRadius: 10.0))
-//                Button("Compress") { isShowingPhotoLibrary = true }.padding()
-//                Button("Compress") { isShowingPhotoLibrary = true }.padding()
-//                HStack {
-//                    Button("Compress") { isShowingPhotoLibrary = true }
-//                }
-//                //.frame(minWidth: .infinity, minHeight: .infinity)
-//                .background(Color.white)
-//
-//                Button(action: {
-//                           print("Round Action")
-//                           }) {
-//                           Text("Press")
-//                               .foregroundColor(Color.green)
-//                               .background(Color.white)
-//                               .clipShape(Circle())
-////                               .aspectRatio(1, contentMode: .fill)
-//                           }
-////                           .aspectRatio(1, contentMode: .fill)
-//                           .frame(maxWidth: .infinity)
-//
-//                Button("even longer Text") {
-//                    print("x")
-//                }
-//                .frame(maxWidth: .infinity)
-//
-//                Button(action: { print("") }) {
-//                    VStack {
-//                        Image(systemName: "video")
-//                            .frame()
-//                    Text("item")
-//                    }
-//                               }    .frame(maxWidth: .infinity, maxHeight: .infinity)
-//                    .contentShape(Rectangle())
-//                    .aspectRatio(1, contentMode: .fill)
-//                    .background(Color.white)
-//
-//                let tap = DragGesture(minimumDistance: 0).onChanged { _ in
-//                    print("onPressed")
-//
-//                }

@@ -1,24 +1,30 @@
 PODS:
   - Alamofire (5.5.0)
+  - CocoaLumberjack/Core (3.7.4)
+  - CocoaLumberjack/Swift (3.7.4):
+    - CocoaLumberjack/Core
   - ffmpeg-kit-ios-full (4.5.1)
   - ffmpeg-kit-macos-full (4.5.1)
 
 DEPENDENCIES:
   - Alamofire (~> 5.5)
+  - CocoaLumberjack/Swift
   - ffmpeg-kit-ios-full (~> 4.5.1)
   - ffmpeg-kit-macos-full (~> 4.5.1)
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - CocoaLumberjack
     - ffmpeg-kit-ios-full
     - ffmpeg-kit-macos-full
 
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
+  CocoaLumberjack: 543c79c114dadc3b1aba95641d8738b06b05b646
   ffmpeg-kit-ios-full: 1e918caa885a00501ec1606c68a874d07d681705
   ffmpeg-kit-macos-full: 8bf0ab8d570a487f9da07d564f6e49bd6f008bac
 
-PODFILE CHECKSUM: 26647075f8e7189f1f20039553946cb99b978ef2
+PODFILE CHECKSUM: ad9108a62aa3dee385aed1efab5eefbcbc0d0d59
 
 COCOAPODS: 1.11.2

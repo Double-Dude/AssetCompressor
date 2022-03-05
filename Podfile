@@ -4,6 +4,7 @@
 target 'AssetCompressor (iOS)' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
+  pod 'CocoaLumberjack/Swift'
 
   # Pods for AssetCompressor (iOS)
   pod 'ffmpeg-kit-ios-full', '~> 4.5.1'

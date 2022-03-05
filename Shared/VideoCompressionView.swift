@@ -8,28 +8,20 @@
 import SwiftUI
 
 struct VideoCompressionView: View {
-    private let textFieldTopPadding = 8.0
-    
-    @State private var inputURLs : URL?
     var id: String = UUID().uuidString
     var namespace: Namespace.ID?
-    @State var value: Float = 50.0
+    @ObservedObject private var viewModel = VideoCompressionViewModel()
+    
     @Namespace private var defaultNameSpace
     @State private var rotate = false
    
-    @State private var frameRate: String = "0"
-    @State private var width: String = "0"
-    @State private var height: String = "0"
-    @State private var bitrate: String = "0"
-    @State private var playbackSpeed: Float = 1
     @State private var scrollOffset: Float = 60
-
-    @State private var scrollViewContentOffset = CGFloat(0)
     @State private var isShowingPhotoLibrary = false
     
     private var videoEditor = FFmpegVideoCompressor(ffmpegCommandFactory: FFmpegCommandFactory())
     
     var body: some View {
+        
         ScrollView {
             ZStack {
                 createBody()
@@ -47,9 +39,8 @@ struct VideoCompressionView: View {
             #if os(iOS)
             ImagePicker{ url in
                 isShowingPhotoLibrary = false
-                inputURLs = url
                 guard let url = url else { return }
-                onVideoSelected(url)
+                viewModel.onVideoSelected(url)
             }
             #endif
         }
@@ -60,17 +51,7 @@ struct VideoCompressionView: View {
             }
         }
     }
-    
-    func onVideoSelected(_ url: URL) {
-        Task {
-            let metadata = await videoEditor.getMetadata(url)
-            frameRate = String(metadata.fps)
-            width = String(metadata.width)
-            height = String(metadata.height)
-            bitrate = String(metadata.bitrate)
-        }
-    }
-    
+
     func createBody() -> some View {
         return  VStack(spacing: 16) {
             createFrameRateItem()
@@ -79,7 +60,7 @@ struct VideoCompressionView: View {
             createPlaybackSpeedItem()
             
             Button("Compress") {
-                
+                viewModel.compress()
             }
             .frame(height: 45)
             .frame(minWidth: 0, maxWidth: .infinity)
@@ -88,10 +69,6 @@ struct VideoCompressionView: View {
             .cornerRadius(30)
             .contentShape(Rectangle())
             .shadow(color: Color.black.opacity(0.4), radius: 3, x: 2, y: 2)
-
-
-            //                    .aspectRatio(1, contentMode: .fill)
-                
                 
             Spacer()
         }
@@ -100,7 +77,7 @@ struct VideoCompressionView: View {
     }
   
     private func createFrameRateItem() -> VideoCompressionTextFieldItem {
-        VideoCompressionTextFieldItem(title: "Frame Rate", subtitle: "The higher the frame rate, the smoother the video is.", value: $frameRate)
+        VideoCompressionTextFieldItem(title: "Frame Rate", subtitle: "The higher the frame rate, the smoother the video is.", value: $viewModel.frameRate)
     }
     
     private func createResolutionItem() -> some View {
@@ -108,13 +85,13 @@ struct VideoCompressionView: View {
         VideoCompressionCustomListItem(
             title: "Resolution",
             subtitle: "The width and height have to be even numbers.",
-            valueString: String("\(width)x\(height)")
+            valueString: String("\(viewModel.width)x\(viewModel.height)")
         ) {
             HStack {
-                createResolutionItemTextField(placeholder: "Width", text: $width)
-                createResolutionItemTextField(placeholder: "Height", text: $height)
+                createResolutionItemTextField(placeholder: "Width", text: $viewModel.width)
+                createResolutionItemTextField(placeholder: "Height", text: $viewModel.height)
             }
-            .padding(.top, textFieldTopPadding)
+            .padding(.top, 8)
         }
     }
     
@@ -138,26 +115,27 @@ struct VideoCompressionView: View {
     }
     
     private func createBitrateItem() -> VideoCompressionTextFieldItem {
-        VideoCompressionTextFieldItem(title: "Bitrate", subtitle: "The higher the bitrate, the larger the video size is.", value: $bitrate)
+        VideoCompressionTextFieldItem(title: "Bitrate", subtitle: "The higher the bitrate, the larger the video size is.", value: $viewModel.bitrate)
     }
     
     private func createPlaybackSpeedItem() -> some View {
         VideoCompressionSliderItem(
             title: "Playback Speed",
-            value: $playbackSpeed,
-            valueString: String(format: "%.1fx", playbackSpeed),
+            value: $viewModel.playbackSpeed,
+            valueString: String(format: "%.1fx", viewModel.playbackSpeed),
             range: 0.1...7,
             step: 0.1
         )
     }
     
     private func compressVideo() {
+        viewModel.compress()
 //        let request = VideoCompressionRequest(
-//            bitRate: ,
-//            playbackSpeed: 2,
-//            outputFps: 17,
-//            outputWidth: 640,
-//            outputHeight: 360,
+//            bitRate: Int(bitrate),
+//            playbackSpeed: playbackSpeed,
+//            outputFps: Int(frameRate),
+//            outputWidth: Int(width),
+//            outputHeight: Int(height),
 //            inputFilePaths: inputURLs,
 //            outputFilePath: outputURL)
 //        Task.init {

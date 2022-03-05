@@ -45,8 +45,7 @@ struct ImagePicker: UIViewControllerRepresentable {
 
             provider.loadFileRepresentation(forTypeIdentifier: UTType.movie.identifier) { [weak self] url, error in
                 debugPrint("Start: \(Date.init())")
-                let temp = FileManager.default.temporaryDirectory.appendingPathComponent("cleanup-on-launch")
-                try! FileManager.default.createDirectory(at: temp, withIntermediateDirectories: true, attributes: nil)
+                let temp = FileLocation.getOrCreateCleanOnLaunchURL()
                 let fileUrl = temp.appendingPathComponent(UUID.init().uuidString+".mp4")
                 try! FileManager.default.moveItem(at: url!, to: fileUrl)
                 debugPrint("Stop: \(Date.init())")

@@ -13,11 +13,6 @@ struct MainView: View {
     @State private var selectedID: String?
     @State private var rotate = false
     @State private var inputURL: URL = URL.init(fileURLWithPath: "")
-    private var outputURL: URL {
-        return FileManager.default.temporaryDirectory
-            .appendingPathComponent("cleanup-on-launch")
-            .appendingPathComponent("Test.mp4")
-    }
 
     private let gridItemLayout = [
         GridItem(spacing: 16),

@@ -29,6 +29,8 @@
 		38302B8527C09ED600EA55E4 /* FFmpegCommandFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38302B8327C09ED600EA55E4 /* FFmpegCommandFactory.swift */; };
 		383B904227D21BD80020C204 /* TextFieldFloatingStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383B904127D21BD80020C204 /* TextFieldFloatingStyle.swift */; };
 		383B904427D2240E0020C204 /* FloatingLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383B904327D2240E0020C204 /* FloatingLabelTextField.swift */; };
+		383B904727D346E10020C204 /* VideoCompressionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383B904627D346E10020C204 /* VideoCompressionViewModel.swift */; };
+		383B904927D3566C0020C204 /* FileLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383B904827D3566C0020C204 /* FileLocation.swift */; };
 		383E1AD827BE442600E06B99 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383E1AD727BE442600E06B99 /* Tests_iOS.swift */; };
 		383E1ADA27BE442600E06B99 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383E1AD927BE442600E06B99 /* Tests_iOSLaunchTests.swift */; };
 		383E1AE427BE442600E06B99 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383E1AE327BE442600E06B99 /* Tests_macOS.swift */; };
@@ -84,6 +86,9 @@
 		38302B8327C09ED600EA55E4 /* FFmpegCommandFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFmpegCommandFactory.swift; sourceTree = "<group>"; };
 		383B904127D21BD80020C204 /* TextFieldFloatingStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldFloatingStyle.swift; sourceTree = "<group>"; };
 		383B904327D2240E0020C204 /* FloatingLabelTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingLabelTextField.swift; sourceTree = "<group>"; };
+		383B904627D346E10020C204 /* VideoCompressionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCompressionViewModel.swift; sourceTree = "<group>"; };
+		383B904827D3566C0020C204 /* FileLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLocation.swift; sourceTree = "<group>"; };
+		383B904A27D35DBD0020C204 /* AssetCompressor--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "AssetCompressor--iOS--Info.plist"; sourceTree = "<group>"; };
 		383E1ABF27BE442500E06B99 /* AssetCompressorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCompressorApp.swift; sourceTree = "<group>"; };
 		383E1AC027BE442500E06B99 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		383E1AC127BE442600E06B99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -162,9 +167,18 @@
 			path = Controls;
 			sourceTree = "<group>";
 		};
+		383B904527D346C80020C204 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				383B904627D346E10020C204 /* VideoCompressionViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		383E1AB927BE442500E06B99 = {
 			isa = PBXGroup;
 			children = (
+				383B904A27D35DBD0020C204 /* AssetCompressor--iOS--Info.plist */,
 				383E1ABE27BE442500E06B99 /* Shared */,
 				383E1ACD27BE442600E06B99 /* macOS */,
 				383E1AD627BE442600E06B99 /* Tests iOS */,
@@ -178,6 +192,7 @@
 		383E1ABE27BE442500E06B99 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				383B904527D346C80020C204 /* ViewModel */,
 				383B904027D21BBB0020C204 /* Controls */,
 				38A0CC4727D0D80F00B0F25A /* Utilities */,
 				38A0CC4327D0B9AB00B0F25A /* VideoEditor */,
@@ -250,6 +265,7 @@
 			children = (
 				382EDD2327C3712D001D9D0A /* SwiftUIView+Extensions.swift */,
 				38A0CC4827D0D81F00B0F25A /* JSON+Extensions.swift */,
+				383B904827D3566C0020C204 /* FileLocation.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -507,6 +523,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				383B904427D2240E0020C204 /* FloatingLabelTextField.swift in Sources */,
+				383B904927D3566C0020C204 /* FileLocation.swift in Sources */,
 				382EDD2727C3B45A001D9D0A /* CircularContainerView.swift in Sources */,
 				38E68F2027C047E800112A4B /* FFmpegVideoCompressor.swift in Sources */,
 				38E68F1D27C0450A00112A4B /* VideoEditor.swift in Sources */,
@@ -521,6 +538,7 @@
 				38E68F1A27C0445A00112A4B /* MainView.swift in Sources */,
 				38A0CC4927D0D81F00B0F25A /* JSON+Extensions.swift in Sources */,
 				383B904227D21BD80020C204 /* TextFieldFloatingStyle.swift in Sources */,
+				383B904727D346E10020C204 /* VideoCompressionViewModel.swift in Sources */,
 				382EDD2427C3712D001D9D0A /* SwiftUIView+Extensions.swift in Sources */,
 				382EDD1E27C3658F001D9D0A /* ImagePicker.swift in Sources */,
 				382EDD1B27C249EF001D9D0A /* SwiftUITestView.swift in Sources */,
@@ -711,6 +729,8 @@
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "AssetCompressor--iOS--Info.plist";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "App saves compressed asset back to photo library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -741,6 +761,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "AssetCompressor--iOS--Info.plist";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "App saves compressed asset back to photo library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

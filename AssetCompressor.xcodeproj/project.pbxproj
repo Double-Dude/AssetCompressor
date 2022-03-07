@@ -44,6 +44,22 @@
 		383E1AEA27BE442600E06B99 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383E1AC027BE442500E06B99 /* ContentView.swift */; };
 		383E1AEB27BE442600E06B99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 383E1AC127BE442600E06B99 /* Assets.xcassets */; };
 		383E1AEC27BE442600E06B99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 383E1AC127BE442600E06B99 /* Assets.xcassets */; };
+		388C33F627D61CBB00E13F62 /* libavdevice.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388C33EE27D61CBA00E13F62 /* libavdevice.xcframework */; };
+		388C33F727D61CBB00E13F62 /* libavdevice.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388C33EE27D61CBA00E13F62 /* libavdevice.xcframework */; };
+		388C33F827D61CBB00E13F62 /* libavformat.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388C33EF27D61CBA00E13F62 /* libavformat.xcframework */; };
+		388C33F927D61CBB00E13F62 /* libavformat.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388C33EF27D61CBA00E13F62 /* libavformat.xcframework */; };
+		388C33FA27D61CBB00E13F62 /* libavutil.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388C33F027D61CBA00E13F62 /* libavutil.xcframework */; };
+		388C33FB27D61CBB00E13F62 /* libavutil.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388C33F027D61CBA00E13F62 /* libavutil.xcframework */; };
+		388C33FC27D61CBB00E13F62 /* libavcodec.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388C33F127D61CBA00E13F62 /* libavcodec.xcframework */; };
+		388C33FD27D61CBB00E13F62 /* libavcodec.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388C33F127D61CBA00E13F62 /* libavcodec.xcframework */; };
+		388C33FE27D61CBB00E13F62 /* libswresample.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388C33F227D61CBA00E13F62 /* libswresample.xcframework */; };
+		388C33FF27D61CBB00E13F62 /* libswresample.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388C33F227D61CBA00E13F62 /* libswresample.xcframework */; };
+		388C340027D61CBB00E13F62 /* libswscale.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388C33F327D61CBA00E13F62 /* libswscale.xcframework */; };
+		388C340127D61CBB00E13F62 /* libswscale.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388C33F327D61CBA00E13F62 /* libswscale.xcframework */; };
+		388C340227D61CBB00E13F62 /* libavfilter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388C33F427D61CBA00E13F62 /* libavfilter.xcframework */; };
+		388C340327D61CBB00E13F62 /* libavfilter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388C33F427D61CBA00E13F62 /* libavfilter.xcframework */; };
+		388C340427D61CBB00E13F62 /* ffmpegkit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388C33F527D61CBA00E13F62 /* ffmpegkit.xcframework */; };
+		388C340527D61CBB00E13F62 /* ffmpegkit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388C33F527D61CBA00E13F62 /* ffmpegkit.xcframework */; };
 		38A0CC4527D0D78500B0F25A /* VideoMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0CC4427D0D78500B0F25A /* VideoMetadata.swift */; };
 		38A0CC4627D0D78500B0F25A /* VideoMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0CC4427D0D78500B0F25A /* VideoMetadata.swift */; };
 		38A0CC4927D0D81F00B0F25A /* JSON+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0CC4827D0D81F00B0F25A /* JSON+Extensions.swift */; };
@@ -106,6 +122,14 @@
 		383E1ADF27BE442600E06B99 /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		383E1AE327BE442600E06B99 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		383E1AE527BE442600E06B99 /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
+		388C33EE27D61CBA00E13F62 /* libavdevice.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libavdevice.xcframework; sourceTree = "<group>"; };
+		388C33EF27D61CBA00E13F62 /* libavformat.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libavformat.xcframework; sourceTree = "<group>"; };
+		388C33F027D61CBA00E13F62 /* libavutil.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libavutil.xcframework; sourceTree = "<group>"; };
+		388C33F127D61CBA00E13F62 /* libavcodec.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libavcodec.xcframework; sourceTree = "<group>"; };
+		388C33F227D61CBA00E13F62 /* libswresample.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libswresample.xcframework; sourceTree = "<group>"; };
+		388C33F327D61CBA00E13F62 /* libswscale.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libswscale.xcframework; sourceTree = "<group>"; };
+		388C33F427D61CBA00E13F62 /* libavfilter.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libavfilter.xcframework; sourceTree = "<group>"; };
+		388C33F527D61CBA00E13F62 /* ffmpegkit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = ffmpegkit.xcframework; sourceTree = "<group>"; };
 		38A0CC4427D0D78500B0F25A /* VideoMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoMetadata.swift; sourceTree = "<group>"; };
 		38A0CC4827D0D81F00B0F25A /* JSON+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+Extensions.swift"; sourceTree = "<group>"; };
 		38E68F1927C0445A00112A4B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -123,6 +147,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				388C33FA27D61CBB00E13F62 /* libavutil.xcframework in Frameworks */,
+				388C33FC27D61CBB00E13F62 /* libavcodec.xcframework in Frameworks */,
+				388C340427D61CBB00E13F62 /* ffmpegkit.xcframework in Frameworks */,
+				388C340227D61CBB00E13F62 /* libavfilter.xcframework in Frameworks */,
+				388C33F627D61CBB00E13F62 /* libavdevice.xcframework in Frameworks */,
+				388C33F827D61CBB00E13F62 /* libavformat.xcframework in Frameworks */,
+				388C33FE27D61CBB00E13F62 /* libswresample.xcframework in Frameworks */,
+				388C340027D61CBB00E13F62 /* libswscale.xcframework in Frameworks */,
 				41A9CCF453B42F5604698B4A /* Pods_AssetCompressor__iOS_.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -131,6 +163,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				388C33FB27D61CBB00E13F62 /* libavutil.xcframework in Frameworks */,
+				388C33FD27D61CBB00E13F62 /* libavcodec.xcframework in Frameworks */,
+				388C340527D61CBB00E13F62 /* ffmpegkit.xcframework in Frameworks */,
+				388C340327D61CBB00E13F62 /* libavfilter.xcframework in Frameworks */,
+				388C33F727D61CBB00E13F62 /* libavdevice.xcframework in Frameworks */,
+				388C33F927D61CBB00E13F62 /* libavformat.xcframework in Frameworks */,
+				388C33FF27D61CBB00E13F62 /* libswresample.xcframework in Frameworks */,
+				388C340127D61CBB00E13F62 /* libswscale.xcframework in Frameworks */,
 				E8FF272C7F16012A60A475B2 /* Pods_AssetCompressor__macOS_.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -198,6 +238,7 @@
 		383E1ABE27BE442500E06B99 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				388C33D327D61C6800E13F62 /* Libraries */,
 				383B904527D346C80020C204 /* ViewModel */,
 				383B904027D21BBB0020C204 /* Controls */,
 				38A0CC4727D0D80F00B0F25A /* Utilities */,
@@ -252,6 +293,29 @@
 				383E1AE527BE442600E06B99 /* Tests_macOSLaunchTests.swift */,
 			);
 			path = "Tests macOS";
+			sourceTree = "<group>";
+		};
+		388C33D327D61C6800E13F62 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				388C33ED27D61CBA00E13F62 /* ffmpeglib */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		388C33ED27D61CBA00E13F62 /* ffmpeglib */ = {
+			isa = PBXGroup;
+			children = (
+				388C33EE27D61CBA00E13F62 /* libavdevice.xcframework */,
+				388C33EF27D61CBA00E13F62 /* libavformat.xcframework */,
+				388C33F027D61CBA00E13F62 /* libavutil.xcframework */,
+				388C33F127D61CBA00E13F62 /* libavcodec.xcframework */,
+				388C33F227D61CBA00E13F62 /* libswresample.xcframework */,
+				388C33F327D61CBA00E13F62 /* libswscale.xcframework */,
+				388C33F427D61CBA00E13F62 /* libavfilter.xcframework */,
+				388C33F527D61CBA00E13F62 /* ffmpegkit.xcframework */,
+			);
+			path = ffmpeglib;
 			sourceTree = "<group>";
 		};
 		38A0CC4327D0B9AB00B0F25A /* VideoEditor */ = {
@@ -316,7 +380,6 @@
 				383E1AC827BE442600E06B99 /* Sources */,
 				383E1AC927BE442600E06B99 /* Frameworks */,
 				383E1ACA27BE442600E06B99 /* Resources */,
-				8F543B1DF762F63383C3B9E4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -481,23 +544,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8F543B1DF762F63383C3B9E4 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AssetCompressor (macOS)/Pods-AssetCompressor (macOS)-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AssetCompressor (macOS)/Pods-AssetCompressor (macOS)-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AssetCompressor (macOS)/Pods-AssetCompressor (macOS)-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F544875D85CB20A74ECC2C9D /* [CP] Check Pods Manifest.lock */ = {

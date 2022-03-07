@@ -7,7 +7,6 @@ target 'AssetCompressor (iOS)' do
   pod 'CocoaLumberjack/Swift'
 
   # Pods for AssetCompressor (iOS)
-  pod 'ffmpeg-kit-ios-full', '~> 4.5.1'
   pod 'Alamofire', '~> 5.5'
 
 end
@@ -17,5 +16,4 @@ target 'AssetCompressor (macOS)' do
   use_frameworks!
 
   # Pods for AssetCompressor (macOS)
-  pod 'ffmpeg-kit-macos-full', '~> 4.5.1'
 end

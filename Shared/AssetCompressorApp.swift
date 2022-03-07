@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+let safeAreaInsets = getSafeAreaInsets()
+
 @main
 struct AssetCompressorApp: App {
     var body: some Scene {

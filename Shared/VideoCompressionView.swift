@@ -22,13 +22,40 @@ struct VideoCompressionView: View {
     
     var body: some View {
         
-        ScrollView {
-            ZStack {
+//        ZStack {
+//            Color.green
+//            createBottomSheet()
+//        }
+//
+//
+        
+//        ScrollView {
+//            Color.red.frame(height: 1000)
+//                .padding(0)
+//
+//
+////                createBody()
+////                createBody()
+//
+//        }
+//        .padding(0)
+////        .overlay(createBottomSheet())
+////        .edgesIgnoringSafeArea(.bottom)
+//        .safeAreaInset(edge: .bottom) {
+//            Color.clear.frame(height: 50 )
+//        }
+////
+        ZStack {
+            ScrollView {
                 createBody()
             }
-        }
+            .offset(y: 50)
+            .safeAreaInset(edge: .bottom) {
+                Color.clear.frame(height: 130)
+            }
 
-        .offset(y: 50)
+            createBottomSheet()
+        }
         .overlay(NavigationBar())
         .background(
             Color
@@ -52,29 +79,95 @@ struct VideoCompressionView: View {
         }
     }
 
-    func createBody() -> some View {
+    private func createBody() -> some View {
         return  VStack(spacing: 16) {
             createFrameRateItem()
             createResolutionItem()
             createBitrateItem()
             createPlaybackSpeedItem()
-            
-            Button("Compress") {
-                viewModel.compress()
-            }
-            .frame(height: 45)
-            .frame(minWidth: 0, maxWidth: .infinity)
-            .foregroundColor(.white)
-            .background(LinearGradient(gradient: Gradient(colors: [.fromHex(0xFF48C6EF), .fromHex(0xFF6F86D6)]), startPoint: .leading, endPoint: .trailing))
-            .cornerRadius(30)
-            .contentShape(Rectangle())
-            .shadow(color: Color.black.opacity(0.4), radius: 3, x: 2, y: 2)
-                
             Spacer()
         }
         .padding()
         .frame(maxHeight: .infinity)
     }
+    
+    private func createBottomSheet() -> some View{    
+        return VStack {
+            Spacer()
+            VStack {
+                Text("Estimate Size:")
+                    .font(.subheadline)
+                    .foregroundColor(.black.opacity(0.4))
+                Text("\(viewModel.estimateFileSize) MB")
+                createCompressButton()
+            }
+            .padding()
+            .padding(.bottom)
+            .background(
+                Color.white
+                    .cornerRadius(30, corners: [.topLeft, .topRight])
+                    .shadow(color: Color.black.opacity(0.4), radius: 5, x: 2, y: 0)
+            )
+        }
+        .ignoresSafeArea()
+
+        
+//        return VStack {
+//            Spacer()
+//            ZStack {
+//                VStack {
+//                    Text("Estimate Size:")
+//                        .font(.subheadline)
+//                        .foregroundColor(.black.opacity(0.4))
+//                    Text("\(80) MB")
+//                    createCompressButton()
+//                }.padding()
+//            }
+//            .background(
+//                backgroundColor
+//                    .cornerRadius(30, corners: [.topLeft, .topRight])
+//                    .shadow(color: Color.black.opacity(0.4), radius: 5, x: 2, y: 0)
+//            )
+//            .frame(maxHeight: .infinity, alignment: .bottom)
+//            .ignoresSafeArea()
+//        }
+//        .ignoresSafeArea()
+//
+//        .contentShape(Rectangle())
+    }
+    
+    
+    private func createBottomSheetContent(_ geometry: GeometryProxy) -> some View {
+        print(geometry.size.width, geometry.size.height)
+
+        
+        return VStack {
+            Text("Estimate Size:")
+                .font(.subheadline)
+                .foregroundColor(.black.opacity(0.4))
+            Text("\(80) MB")
+            createCompressButton()
+        }
+        .frame(alignment: .bottom)
+        .padding()
+        .padding(.bottom)
+    }
+    
+    private func createCompressButton() -> some View{
+        Button("Compress") {
+            viewModel.compress()
+        }
+        .frame(height: 50)
+        .frame(minWidth: 0, maxWidth: .infinity)
+        .foregroundColor(.white)
+        .background(LinearGradient(gradient: Gradient(colors: [.fromHex(0xFF48C6EF), .fromHex(0xFF6F86D6)]), startPoint: .leading, endPoint: .trailing))
+        .cornerRadius(30)
+        .contentShape(Rectangle())
+        .shadow(color: Color.black.opacity(0.4), radius: 3, x: 2, y: 2)
+            
+
+    }
+    
   
     private func createFrameRateItem() -> VideoCompressionTextFieldItem {
         VideoCompressionTextFieldItem(title: "Frame Rate", subtitle: "The higher the frame rate, the smoother the video is.", value: $viewModel.frameRate)
@@ -149,6 +242,20 @@ struct VideoCompressionView: View {
 //                    debugPrint("Failed \(error.localizedDescription)")
 //               }
 //        }
+    }
+}
+
+struct GeometryGetter: View {
+    @Binding var rect: CGRect
+
+    var body: some View {
+        GeometryReader { (g) -> Path in
+            print("width: \(g.size.width), height: \(g.size.height)")
+            DispatchQueue.main.async { // avoids warning: 'Modifying state during view update.' Doesn't look very reliable, but works.
+                self.rect = g.frame(in: .global)
+            }
+            return Path() // could be some other dummy view
+        }
     }
 }
 

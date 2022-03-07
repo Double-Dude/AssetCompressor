@@ -12,7 +12,8 @@ struct VideoMetadata {
     let width: Int
     let height: Int
     let fps: Int
-    
+    let duration: Double
+
     static func fromDict(_ dict:[String: Any]) -> Self {
         let videoStream = getVideoStream(dict)
 //        let format = getformat(dict)
@@ -21,12 +22,14 @@ struct VideoMetadata {
         let fpsValues = fpsString.split(separator: "/")
         let fpsDividend = Int(String(fpsValues.first!))!
         let fpsDivisor = Int(String(fpsValues.last!))!
-
+        let duration = videoStream["duration"] as! String
+        
         let metadata = VideoMetadata(
             bitrate: Int(bitrate)!,
             width: videoStream["width"] as! Int,
             height: videoStream["height"] as! Int,
-            fps: fpsDividend/fpsDivisor
+            fps: fpsDividend/fpsDivisor,
+            duration: Double(duration)!
         )
         
         return metadata

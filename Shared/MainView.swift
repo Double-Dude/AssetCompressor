@@ -22,8 +22,8 @@ struct MainView: View {
     var body: some View {
         if(selectedID != nil) {
             VideoCompressionView()
-                .matchedGeometryEffect(id: "1", in: namespace)
-                .transition(.fly)
+//                .matchedGeometryEffect(id: "1", in: namespace)
+//                .transition(.fly)
         }
         
         if(selectedID == nil) {

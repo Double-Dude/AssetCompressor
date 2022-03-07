@@ -63,8 +63,10 @@ class FFmpegCommandBuilder {
         for inputFilePath in inputFilePaths {
             appendCommandOption("-i", argument: inputFilePath.path)
         }
+        
         appendCommandOption("-filter_complex", argument: buildFilterArgument(inputFilePaths: inputFilePaths))
         appendCommandOption("-b:v", argument: String(bitRate))
+        appendCommandOption("-b:a", argument: String(bitRate))
         appendCommandOption("-map", argument: "\"[v]\"")
         appendCommandOption("-map", argument: "\"[a]\" \(outputFilePath.path)")
 

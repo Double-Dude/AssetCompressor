@@ -24,6 +24,7 @@ class FFmpegVideoCompressor : VideoEditor {
     
     func execute(videoCompressionRequest: VideoCompressionRequest) async -> Result<URL, FFmpegVideoCompressorError> {
         let command = FFmpegCommandFactory().createVideoCompressionCommand(videoCompressionRequest)
+        debugPrint("Compress Video Command: \(command)")
         let session = FFmpegKit.execute(command)
         
         if(ReturnCode.isSuccess(session!.getReturnCode())) {

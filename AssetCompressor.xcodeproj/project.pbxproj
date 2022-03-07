@@ -31,6 +31,9 @@
 		383B904427D2240E0020C204 /* FloatingLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383B904327D2240E0020C204 /* FloatingLabelTextField.swift */; };
 		383B904727D346E10020C204 /* VideoCompressionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383B904627D346E10020C204 /* VideoCompressionViewModel.swift */; };
 		383B904927D3566C0020C204 /* FileLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383B904827D3566C0020C204 /* FileLocation.swift */; };
+		383B904C27D368CA0020C204 /* RoundCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383B904B27D368CA0020C204 /* RoundCorner.swift */; };
+		383B904E27D39A310020C204 /* WindowExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383B904D27D39A310020C204 /* WindowExtensions.swift */; };
+		383B904F27D39A310020C204 /* WindowExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383B904D27D39A310020C204 /* WindowExtensions.swift */; };
 		383E1AD827BE442600E06B99 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383E1AD727BE442600E06B99 /* Tests_iOS.swift */; };
 		383E1ADA27BE442600E06B99 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383E1AD927BE442600E06B99 /* Tests_iOSLaunchTests.swift */; };
 		383E1AE427BE442600E06B99 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383E1AE327BE442600E06B99 /* Tests_macOS.swift */; };
@@ -89,6 +92,8 @@
 		383B904627D346E10020C204 /* VideoCompressionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCompressionViewModel.swift; sourceTree = "<group>"; };
 		383B904827D3566C0020C204 /* FileLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLocation.swift; sourceTree = "<group>"; };
 		383B904A27D35DBD0020C204 /* AssetCompressor--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "AssetCompressor--iOS--Info.plist"; sourceTree = "<group>"; };
+		383B904B27D368CA0020C204 /* RoundCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundCorner.swift; sourceTree = "<group>"; };
+		383B904D27D39A310020C204 /* WindowExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowExtensions.swift; sourceTree = "<group>"; };
 		383E1ABF27BE442500E06B99 /* AssetCompressorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCompressorApp.swift; sourceTree = "<group>"; };
 		383E1AC027BE442500E06B99 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		383E1AC127BE442600E06B99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -163,6 +168,7 @@
 			children = (
 				383B904127D21BD80020C204 /* TextFieldFloatingStyle.swift */,
 				383B904327D2240E0020C204 /* FloatingLabelTextField.swift */,
+				383B904B27D368CA0020C204 /* RoundCorner.swift */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -266,6 +272,7 @@
 				382EDD2327C3712D001D9D0A /* SwiftUIView+Extensions.swift */,
 				38A0CC4827D0D81F00B0F25A /* JSON+Extensions.swift */,
 				383B904827D3566C0020C204 /* FileLocation.swift */,
+				383B904D27D39A310020C204 /* WindowExtensions.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -522,6 +529,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				383B904E27D39A310020C204 /* WindowExtensions.swift in Sources */,
 				383B904427D2240E0020C204 /* FloatingLabelTextField.swift in Sources */,
 				383B904927D3566C0020C204 /* FileLocation.swift in Sources */,
 				382EDD2727C3B45A001D9D0A /* CircularContainerView.swift in Sources */,
@@ -539,6 +547,7 @@
 				38A0CC4927D0D81F00B0F25A /* JSON+Extensions.swift in Sources */,
 				383B904227D21BD80020C204 /* TextFieldFloatingStyle.swift in Sources */,
 				383B904727D346E10020C204 /* VideoCompressionViewModel.swift in Sources */,
+				383B904C27D368CA0020C204 /* RoundCorner.swift in Sources */,
 				382EDD2427C3712D001D9D0A /* SwiftUIView+Extensions.swift in Sources */,
 				382EDD1E27C3658F001D9D0A /* ImagePicker.swift in Sources */,
 				382EDD1B27C249EF001D9D0A /* SwiftUITestView.swift in Sources */,
@@ -557,6 +566,7 @@
 				382EDD1927C1D5A0001D9D0A /* Color+Extensions.swift in Sources */,
 				382EDD2E27C50989001D9D0A /* NavigationBar.swift in Sources */,
 				38A0CC4627D0D78500B0F25A /* VideoMetadata.swift in Sources */,
+				383B904F27D39A310020C204 /* WindowExtensions.swift in Sources */,
 				38302B8527C09ED600EA55E4 /* FFmpegCommandFactory.swift in Sources */,
 				382EDD2B27C3BB23001D9D0A /* VideoCompressionView.swift in Sources */,
 				382EDD2227C368D7001D9D0A /* MainMenuItem.swift in Sources */,

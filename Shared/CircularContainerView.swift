@@ -36,7 +36,7 @@ struct CircularContainerView<ContentView: View>: View {
         .background(
             backgroundColor
                 .cornerRadius(30)
-                .shadow(color: Color.black.opacity(0.4), radius: 10, x: 2, y: 10)
+                .shadow(color: Color.black.opacity(0.4), radius: 3, x: 2, y: 2)
         )
         .contentShape(Rectangle())
         .scaleEffect(isPressed && onTapped != nil ? 1.1 : 1)

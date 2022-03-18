@@ -15,7 +15,6 @@ struct MainMenuItem: View {
     @State private var isPressed = false
     var onTapped: (() -> Void)?
     
-    
     var body: some View {
 
         CircularContainerView(id: id, namespace: namespace, onTapped: onTapped) {

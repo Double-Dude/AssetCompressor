@@ -14,6 +14,7 @@ struct FFmpegCommandFactory {
             .buildPlaybackSpeed(request.playbackSpeed)
             .buildOutputFps(request.outputFps)
             .buildResolution(width: request.outputWidth, height: request.outputHeight)
+            .buildEnabledAudio(request.isAudioEnabled)
             .buildInputFilePaths(request.inputFilePaths)
             .buildOutputFilePath(request.outputFilePath)
             .build()

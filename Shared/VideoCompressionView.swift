@@ -6,45 +6,31 @@
 //
 
 import SwiftUI
+import Combine
 
 struct VideoCompressionView: View {
     var id: String = UUID().uuidString
     var namespace: Namespace.ID?
-    @ObservedObject private var viewModel = VideoCompressionViewModel()
+    var isActive: Binding<Bool>
+    @ObservedObject var viewModel = VideoCompressionViewModel()
     
     @Namespace private var defaultNameSpace
     @State private var rotate = false
    
     @State private var scrollOffset: Float = 60
     @State private var isShowingPhotoLibrary = false
-    
-    private var videoEditor = FFmpegVideoCompressor(ffmpegCommandFactory: FFmpegCommandFactory())
+    private var subscribers: Set<AnyCancellable> = []
+
+    init(isActive: Binding<Bool>) {
+        self.isActive = isActive
+        viewModel.$hasCompleted.sink { value in
+            withAnimation(Animation.easeInOut(duration: 0.8)) {
+                isActive.wrappedValue = value
+            }
+        }.store(in: &subscribers)
+    }
     
     var body: some View {
-        
-//        ZStack {
-//            Color.green
-//            createBottomSheet()
-//        }
-//
-//
-        
-//        ScrollView {
-//            Color.red.frame(height: 1000)
-//                .padding(0)
-//
-//
-////                createBody()
-////                createBody()
-//
-//        }
-//        .padding(0)
-////        .overlay(createBottomSheet())
-////        .edgesIgnoringSafeArea(.bottom)
-//        .safeAreaInset(edge: .bottom) {
-//            Color.clear.frame(height: 50 )
-//        }
-////
         ZStack {
             ScrollView {
                 createBody()
@@ -55,8 +41,17 @@ struct VideoCompressionView: View {
             }
 
             createBottomSheet()
+            
+            if(viewModel.compressing) {
+                ProgressView(progress: viewModel.progress)
+            }
+                
         }
-        .overlay(NavigationBar())
+        .overlay(NavigationBar {
+            withAnimation(Animation.easeInOut(duration: 0.8)) {
+                self.isActive.wrappedValue = false
+            }
+        })
         .background(
             Color
                 .fromHex(0xF2F3F8)
@@ -73,7 +68,7 @@ struct VideoCompressionView: View {
         }
         .onAppear {
             Task {
-                try! await Task.sleep(nanoseconds: 1000000000)
+                try! await Task.sleep(seconds: 1)
                 isShowingPhotoLibrary = true
             }
         }
@@ -85,6 +80,7 @@ struct VideoCompressionView: View {
             createResolutionItem()
             createBitrateItem()
             createPlaybackSpeedItem()
+            createEnableAudioItem()
             Spacer()
         }
         .padding()
@@ -221,27 +217,15 @@ struct VideoCompressionView: View {
         )
     }
     
+    private func createEnableAudioItem() -> some View {
+        CircularContainerView(backgroundColor: .white) {
+            Toggle("Enable Audio", isOn: $viewModel.isAudioEnabled)
+                .font(.title2)
+        }
+    }
+    
     private func compressVideo() {
         viewModel.compress()
-//        let request = VideoCompressionRequest(
-//            bitRate: Int(bitrate),
-//            playbackSpeed: playbackSpeed,
-//            outputFps: Int(frameRate),
-//            outputWidth: Int(width),
-//            outputHeight: Int(height),
-//            inputFilePaths: inputURLs,
-//            outputFilePath: outputURL)
-//        Task.init {
-//            let result = await FFmpegVideoCompressor(ffmpegCommandFactory: FFmpegCommandFactory()).execute(videoCompressionRequest: request)
-//            switch result {
-//               case .success(let url):
-//                debugPrint("Completed \(url.path)")
-//                UISaveVideoAtPathToSavedPhotosAlbum(url.path, self, nil, nil)
-//
-//               case .failure(let error):
-//                    debugPrint("Failed \(error.localizedDescription)")
-//               }
-//        }
     }
 }
 
@@ -341,6 +325,6 @@ struct VideoCompressionCustomListItem<ContentView: View> : View{
 
 struct VideoCompressionView_Previews: PreviewProvider {
     static var previews: some View {
-        VideoCompressionView()
+        VideoCompressionView(isActive: .constant(true))
     }
 }

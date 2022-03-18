@@ -44,6 +44,9 @@
 		383E1AEA27BE442600E06B99 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383E1AC027BE442500E06B99 /* ContentView.swift */; };
 		383E1AEB27BE442600E06B99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 383E1AC127BE442600E06B99 /* Assets.xcassets */; };
 		383E1AEC27BE442600E06B99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 383E1AC127BE442600E06B99 /* Assets.xcassets */; };
+		385A61FF27E34714008E9862 /* Task+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A61FE27E34714008E9862 /* Task+Extensions.swift */; };
+		385A620027E34714008E9862 /* Task+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385A61FE27E34714008E9862 /* Task+Extensions.swift */; };
+		386146E127E1DE7A00B6E9D2 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386146E027E1DE7A00B6E9D2 /* ProgressView.swift */; };
 		388C33F627D61CBB00E13F62 /* libavdevice.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388C33EE27D61CBA00E13F62 /* libavdevice.xcframework */; };
 		388C33F727D61CBB00E13F62 /* libavdevice.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388C33EE27D61CBA00E13F62 /* libavdevice.xcframework */; };
 		388C33F827D61CBB00E13F62 /* libavformat.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388C33EF27D61CBA00E13F62 /* libavformat.xcframework */; };
@@ -122,6 +125,8 @@
 		383E1ADF27BE442600E06B99 /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		383E1AE327BE442600E06B99 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		383E1AE527BE442600E06B99 /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
+		385A61FE27E34714008E9862 /* Task+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Extensions.swift"; sourceTree = "<group>"; };
+		386146E027E1DE7A00B6E9D2 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		388C33EE27D61CBA00E13F62 /* libavdevice.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libavdevice.xcframework; sourceTree = "<group>"; };
 		388C33EF27D61CBA00E13F62 /* libavformat.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libavformat.xcframework; sourceTree = "<group>"; };
 		388C33F027D61CBA00E13F62 /* libavutil.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libavutil.xcframework; sourceTree = "<group>"; };
@@ -209,6 +214,7 @@
 				383B904127D21BD80020C204 /* TextFieldFloatingStyle.swift */,
 				383B904327D2240E0020C204 /* FloatingLabelTextField.swift */,
 				383B904B27D368CA0020C204 /* RoundCorner.swift */,
+				386146E027E1DE7A00B6E9D2 /* ProgressView.swift */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -337,6 +343,7 @@
 				38A0CC4827D0D81F00B0F25A /* JSON+Extensions.swift */,
 				383B904827D3566C0020C204 /* FileLocation.swift */,
 				383B904D27D39A310020C204 /* WindowExtensions.swift */,
+				385A61FE27E34714008E9862 /* Task+Extensions.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -580,6 +587,7 @@
 				383B904927D3566C0020C204 /* FileLocation.swift in Sources */,
 				382EDD2727C3B45A001D9D0A /* CircularContainerView.swift in Sources */,
 				38E68F2027C047E800112A4B /* FFmpegVideoCompressor.swift in Sources */,
+				386146E127E1DE7A00B6E9D2 /* ProgressView.swift in Sources */,
 				38E68F1D27C0450A00112A4B /* VideoEditor.swift in Sources */,
 				38302B8127C08A3500EA55E4 /* FFmpegCommandBuilder.swift in Sources */,
 				382EDD1827C1D5A0001D9D0A /* Color+Extensions.swift in Sources */,
@@ -591,6 +599,7 @@
 				383E1AE927BE442600E06B99 /* ContentView.swift in Sources */,
 				38E68F1A27C0445A00112A4B /* MainView.swift in Sources */,
 				38A0CC4927D0D81F00B0F25A /* JSON+Extensions.swift in Sources */,
+				385A61FF27E34714008E9862 /* Task+Extensions.swift in Sources */,
 				383B904227D21BD80020C204 /* TextFieldFloatingStyle.swift in Sources */,
 				383B904727D346E10020C204 /* VideoCompressionViewModel.swift in Sources */,
 				383B904C27D368CA0020C204 /* RoundCorner.swift in Sources */,
@@ -611,6 +620,7 @@
 				38302B8227C08A3500EA55E4 /* FFmpegCommandBuilder.swift in Sources */,
 				382EDD1927C1D5A0001D9D0A /* Color+Extensions.swift in Sources */,
 				382EDD2E27C50989001D9D0A /* NavigationBar.swift in Sources */,
+				385A620027E34714008E9862 /* Task+Extensions.swift in Sources */,
 				38A0CC4627D0D78500B0F25A /* VideoMetadata.swift in Sources */,
 				383B904F27D39A310020C204 /* WindowExtensions.swift in Sources */,
 				38302B8527C09ED600EA55E4 /* FFmpegCommandFactory.swift in Sources */,

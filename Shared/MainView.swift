@@ -11,6 +11,7 @@ struct MainView: View {
     @Namespace private var namespace
     @State private var isShowingPhotoLibrary = false
     @State private var selectedID: String?
+    @State private var showCompressionView = false
     @State private var rotate = false
     @State private var inputURL: URL = URL.init(fileURLWithPath: "")
 
@@ -20,13 +21,13 @@ struct MainView: View {
     ]
     
     var body: some View {
-        if(selectedID != nil) {
-            VideoCompressionView()
+        if(showCompressionView) {
+            VideoCompressionView(isActive: $showCompressionView)
 //                .matchedGeometryEffect(id: "1", in: namespace)
 //                .transition(.fly)
         }
         
-        if(selectedID == nil) {
+        if(showCompressionView == false) {
             createMainView()
         }
     }
@@ -66,6 +67,7 @@ struct MainView: View {
 //                isShowingPhotoLibrary = true
                 withAnimation(Animation.easeInOut(duration: 0.8)) {
                     selectedID = id
+                    showCompressionView = true
                 }
             }
         )

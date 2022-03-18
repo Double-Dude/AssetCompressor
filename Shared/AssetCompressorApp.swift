@@ -7,7 +7,9 @@
 
 import SwiftUI
 
+#if os(iOS)
 let safeAreaInsets = getSafeAreaInsets()
+#endif
 
 @main
 struct AssetCompressorApp: App {

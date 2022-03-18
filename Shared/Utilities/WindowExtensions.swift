@@ -6,7 +6,9 @@
 //
 
 import Foundation
+#if os(iOS)
 import UIKit
+import SwiftUI
 
 func getSafeAreaInsets() -> UIEdgeInsets{
     let keyWindow = UIApplication.shared.connectedScenes
@@ -18,3 +20,4 @@ func getSafeAreaInsets() -> UIEdgeInsets{
 
     return keyWindow!.safeAreaInsets
 }
+#endif

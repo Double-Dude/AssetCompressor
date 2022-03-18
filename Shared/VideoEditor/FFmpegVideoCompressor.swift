@@ -22,15 +22,38 @@ class FFmpegVideoCompressor : VideoEditor {
         return VideoMetadata.fromDict(jsonDict!)
     }
     
-    func execute(videoCompressionRequest: VideoCompressionRequest) async -> Result<URL, FFmpegVideoCompressorError> {
+    func execute(videoCompressionRequest: VideoCompressionRequest) async throws -> URL {
         let command = FFmpegCommandFactory().createVideoCompressionCommand(videoCompressionRequest)
         debugPrint("Compress Video Command: \(command)")
-        let session = FFmpegKit.execute(command)
-        
-        if(ReturnCode.isSuccess(session!.getReturnCode())) {
-            return .success(videoCompressionRequest.outputFilePath)
-        } else {
-            return .failure(FFmpegVideoCompressorError.unexpectedError(session!.getAllLogsAsString()))
+        return try await withCheckedThrowingContinuation { continuation in
+            Task {
+                var totalDuration = 0.0
+                for url in videoCompressionRequest.inputFilePaths {
+                    totalDuration += await getMetadata(url).duration
+                }
+                videoCompressionRequest.progress?.totalUnitCount = Int64(totalDuration)
+
+                debugPrint("totalDuration: \(totalDuration)")
+
+                FFmpegKit.executeAsync(command) { session in
+                    
+                    if(ReturnCode.isSuccess(session!.getReturnCode())) {
+                        continuation.resume(with: .success(videoCompressionRequest.outputFilePath))
+                    } else {
+                        continuation.resume(with: .failure(FFmpegVideoCompressorError.unexpectedError(session!.getAllLogsAsString())))
+                    }
+                } withLogCallback: { log in
+                    log?.getMessage()
+                    debugPrint("Log: \( log!.getMessage())")
+                } withStatisticsCallback: { stats in
+                    if let currentTime = stats?.getTime() {
+                        videoCompressionRequest.progress?.completedUnitCount = Int64(currentTime) / 1000
+                        debugPrint("currentTime: \(currentTime)")
+                        debugPrint("percentage: \(videoCompressionRequest.progress?.fractionCompleted)")
+                    }
+                }
+            }
+            
         }
     }
 }

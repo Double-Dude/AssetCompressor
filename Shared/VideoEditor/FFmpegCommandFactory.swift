@@ -9,7 +9,7 @@ import Foundation
 
 struct FFmpegCommandFactory {
     func createVideoCompressionCommand(_ request: VideoCompressionRequest) -> String {        
-        return try! FFmpegCommandBuilder()
+        var builder = FFmpegCommandBuilder()
             .buildBitRate(request.bitRate)
             .buildPlaybackSpeed(request.playbackSpeed)
             .buildOutputFps(request.outputFps)
@@ -17,6 +17,12 @@ struct FFmpegCommandFactory {
             .buildEnabledAudio(request.isAudioEnabled)
             .buildInputFilePaths(request.inputFilePaths)
             .buildOutputFilePath(request.outputFilePath)
-            .build()
+        if let trimStart = request.trimStart, let trimEnd = request.trimEnd {
+            builder = builder
+                .buildTrimStart(trimStart)
+                .buildTrimEnd(trimEnd)
+        }
+           
+        return try! builder.build()
     }
 }

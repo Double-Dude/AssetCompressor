@@ -15,30 +15,51 @@ class FFmpegVideoCompressor : VideoEditor {
         self.ffmpegCommandFactory = ffmpegCommandFactory
     }
     
-    func getMetadata(_ url: URL) async -> VideoMetadata {
+    func getMetadata(_ url: URL) async throws -> VideoMetadata {
         let command = "-loglevel 0 -print_format json -show_format -show_streams \(url.path)"
         let result = FFprobeKit.execute(command)
+        FFprobeKit.getMediaInformation(url.path).getMediaInformation()
         let jsonDict = JSONSerialization.convertToDictionary(result!.getOutput())
-        return VideoMetadata.fromDict(jsonDict!)
+        if jsonDict == nil || jsonDict!.isEmpty {
+            throw FFmpegVideoCompressorError.unexpectedError("Unable to parse json: \(String(describing: jsonDict))")
+        }
+ 
+        let metadata = VideoMetadata.fromDict(jsonDict!)
+        guard let metadata = metadata else {
+            throw FFmpegVideoCompressorError.unexpectedError("Unable to parse json: \(jsonDict!)")
+        }
+        
+        return metadata
     }
     
-    func execute(videoCompressionRequest: VideoCompressionRequest) async throws -> URL {
-        let command = FFmpegCommandFactory().createVideoCompressionCommand(videoCompressionRequest)
+//    private func createMetadata(mediaInformation: MediaInformation) -> VideoMetadata {
+//        return VideoMetadata(
+//            bitrate = Int(mediaInformation.getBitrate())!,
+//            width = Int(mediaInformation.get)!,
+//            let height: Int
+//            let fps: Int
+//            let duration: Double
+//            let size: Int64 // bytes
+//        )
+//    }
+    
+    func execute(_ request: VideoCompressionRequest) async throws -> URL {
+        let command = FFmpegCommandFactory().createVideoCompressionCommand(request)
         debugPrint("Compress Video Command: \(command)")
         return try await withCheckedThrowingContinuation { continuation in
             Task {
                 var totalDuration = 0.0
-                for url in videoCompressionRequest.inputFilePaths {
-                    totalDuration += await getMetadata(url).duration
+                for url in request.inputFilePaths {
+                    totalDuration += try await getMetadata(url).duration
                 }
-                videoCompressionRequest.progress?.totalUnitCount = Int64(totalDuration)
+                request.progress?.totalUnitCount = Int64(totalDuration/request.playbackSpeed)
 
                 debugPrint("totalDuration: \(totalDuration)")
 
                 FFmpegKit.executeAsync(command) { session in
                     
                     if(ReturnCode.isSuccess(session!.getReturnCode())) {
-                        continuation.resume(with: .success(videoCompressionRequest.outputFilePath))
+                        continuation.resume(with: .success(request.outputFilePath))
                     } else {
                         continuation.resume(with: .failure(FFmpegVideoCompressorError.unexpectedError(session!.getAllLogsAsString())))
                     }
@@ -47,9 +68,9 @@ class FFmpegVideoCompressor : VideoEditor {
                     debugPrint("Log: \( log!.getMessage())")
                 } withStatisticsCallback: { stats in
                     if let currentTime = stats?.getTime() {
-                        videoCompressionRequest.progress?.completedUnitCount = Int64(currentTime) / 1000
+                        request.progress?.completedUnitCount = Int64(currentTime) / 1000
                         debugPrint("currentTime: \(currentTime)")
-                        debugPrint("percentage: \(videoCompressionRequest.progress?.fractionCompleted)")
+                        debugPrint("percentage: \(request.progress?.fractionCompleted)")
                     }
                 }
             }

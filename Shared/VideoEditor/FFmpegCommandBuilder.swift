@@ -21,6 +21,8 @@ class FFmpegCommandBuilder {
     private var bitRate: Int = 1096
     private var isAudioEnabled: Bool = true
     private var command: String = ""
+    private var trimStart: Double?
+    private var trimEnd: Double?
     
     func buildPlaybackSpeed(_ playbackSpeed: Double) -> Self {
         self.playbackSpeed = playbackSpeed
@@ -60,6 +62,16 @@ class FFmpegCommandBuilder {
         return self
     }
     
+    func buildTrimStart(_ trimStart: Double) -> Self {
+        self.trimStart = trimStart
+        return self
+    }
+    
+    func buildTrimEnd(_ trimEnd: Double) -> Self {
+        self.trimEnd = trimEnd
+        return self
+    }
+    
     func build() throws -> String {
         guard let inputFilePaths = inputFilePaths, let outputFilePath = outputFilePath else {
             throw FFmpegRequestBuilderError.missingArgument("Missing input or output file paths")
@@ -96,8 +108,8 @@ class FFmpegCommandBuilder {
         var filterArgument = "\""
         
         for (index, _) in inputFilePaths.enumerated() {
-            filterArgument += "[\(index):v]scale=\(width)*\(height),setpts=\(1/playbackSpeed)*PTS,fps=\(outputFps)[v\(index)];"
-            filterArgument += "[\(index):a]atempo=\(playbackSpeed)[a\(index)];"
+            filterArgument += buildVideoFilterLine(index: index)
+            filterArgument += buildAudioFilterLine(index: index)
         }
         
         for (index, _) in inputFilePaths.enumerated() {
@@ -114,7 +126,7 @@ class FFmpegCommandBuilder {
         var filterArgument = "\""
         
         for (index, _) in inputFilePaths.enumerated() {
-            filterArgument += "[\(index):v]scale=\(width)*\(height),setpts=\(1/playbackSpeed)*PTS,fps=\(outputFps)[v\(index)];"
+            filterArgument += buildVideoFilterLine(index: index)
         }
         
         for (index, _) in inputFilePaths.enumerated() {
@@ -125,6 +137,41 @@ class FFmpegCommandBuilder {
         filterArgument += "\""
        
         return filterArgument
+    }
+    
+    private func buildVideoFilterLine(index: Int) -> String {
+        let tagStart = "[\(index):v]"
+        let tagEnd = "[v\(index)];"
+        var trim: String?
+        if let trimStart = trimStart, let trimEnd = trimEnd {
+            trim = "trim=start=\(trimStart):end=\(trimEnd)"
+        }
+        let scale = "scale=\(width)*\(height)"
+        let speed = "setpts=\(1/playbackSpeed)*PTS"
+        let fps = "fps=\(outputFps)"
+        
+        var arguments = [String]()
+        if let trim = trim {
+            arguments.append(trim)
+        }
+        arguments.append(contentsOf: [scale, speed, fps])
+        
+        var filterLine = tagStart
+        for argument in arguments {
+            filterLine += argument + ","
+        }
+        filterLine.removeLast()
+        filterLine += tagEnd
+        
+        return filterLine
+    }
+    
+    private func buildAudioFilterLine(index: Int) -> String {
+        if let trimStart = trimStart, let trimEnd = trimEnd {
+            return "[\(index):a]atrim=start=\(trimStart):end=\(trimEnd),atempo=\(playbackSpeed)[a\(index)];"
+        } else {
+            return "[\(index):a]atempo=\(playbackSpeed)[a\(index)];"
+        }
     }
     
     private func appendCommandOption(_ option: String) {

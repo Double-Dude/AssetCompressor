@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct VideoCompressionRequest {
+struct VideoCompressionRequest : Equatable {
     let bitRate: Int
     let playbackSpeed: Double
     let outputFps: Int
@@ -17,7 +17,9 @@ struct VideoCompressionRequest {
     let isAudioEnabled: Bool
     let inputFilePaths: [URL]
     let outputFilePath: URL
-    var progress: Progress?
+    let trimStart: Double?
+    let trimEnd: Double?
+    let progress: Progress?
 }
 
 enum FFmpegVideoCompressorError: Error {
@@ -25,8 +27,8 @@ enum FFmpegVideoCompressorError: Error {
 }
 
 protocol VideoEditor {
-    func getMetadata(_ url: URL) async -> VideoMetadata
-    func execute(videoCompressionRequest: VideoCompressionRequest) async throws -> URL
+    func getMetadata(_ url: URL) async throws -> VideoMetadata
+    func execute(_ request: VideoCompressionRequest) async throws -> URL
 }
 
 class VideoProcessProgress {

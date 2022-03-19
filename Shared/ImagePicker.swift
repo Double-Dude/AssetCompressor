@@ -39,15 +39,23 @@ struct ImagePicker: UIViewControllerRepresentable {
 
         func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
             guard let provider = results.first?.itemProvider else {
-                self.parent.presentationMode.wrappedValue.dismiss()
+                Task {
+                    self.parent.presentationMode.wrappedValue.dismiss()
+                    try! await Task.sleep(seconds: 0.5)
+                    self.parent.onCompletion(nil)
+                }
                 return
             }
 
             provider.loadFileRepresentation(forTypeIdentifier: UTType.movie.identifier) { [weak self] url, error in
+                guard let url = url else {
+                    self?.parent.onCompletion(nil)
+                    return
+                }
                 debugPrint("Start: \(Date.init())")
                 let temp = FileLocation.getOrCreateCleanOnLaunchURL()
-                let fileUrl = temp.appendingPathComponent(UUID.init().uuidString+".mp4")
-                try! FileManager.default.moveItem(at: url!, to: fileUrl)
+                let fileUrl = temp.appendingPathComponent(UUID.init().uuidString + "." + url.pathExtension)
+                try! FileManager.default.moveItem(at: url, to: fileUrl)
                 debugPrint("Stop: \(Date.init())")
                 self?.parent.onCompletion(fileUrl)
 //                self?.parent.presentationMode.wrappedValue.dismiss()

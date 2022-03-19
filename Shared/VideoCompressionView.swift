@@ -12,7 +12,7 @@ struct VideoCompressionView: View {
     var id: String = UUID().uuidString
     var namespace: Namespace.ID?
     var isActive: Binding<Bool>
-    @ObservedObject var viewModel = VideoCompressionViewModel()
+    @ObservedObject var viewModel: VideoCompressionViewModel
     
     @Namespace private var defaultNameSpace
     @State private var rotate = false
@@ -23,11 +23,8 @@ struct VideoCompressionView: View {
 
     init(isActive: Binding<Bool>) {
         self.isActive = isActive
-        viewModel.$hasCompleted.sink { value in
-            withAnimation(Animation.easeInOut(duration: 0.8)) {
-                isActive.wrappedValue = value
-            }
-        }.store(in: &subscribers)
+        viewModel = VideoCompressionViewModel()
+      
     }
     
     var body: some View {
@@ -45,12 +42,9 @@ struct VideoCompressionView: View {
             if(viewModel.compressing) {
                 ProgressView(progress: viewModel.progress)
             }
-                
         }
         .overlay(NavigationBar {
-            withAnimation(Animation.easeInOut(duration: 0.8)) {
-                self.isActive.wrappedValue = false
-            }
+            dismiss()
         })
         .background(
             Color
@@ -61,12 +55,18 @@ struct VideoCompressionView: View {
             #if os(iOS)
             ImagePicker{ url in
                 isShowingPhotoLibrary = false
-                guard let url = url else { return }
+                guard let url = url else {
+                    dismiss()
+                    return
+                }
                 viewModel.onVideoSelected(url)
             }
             #endif
         }
         .onAppear {
+            viewModel.onCompletion = {
+                dismiss()
+            }
             Task {
                 try! await Task.sleep(seconds: 1)
                 isShowingPhotoLibrary = true
@@ -90,11 +90,16 @@ struct VideoCompressionView: View {
     private func createBottomSheet() -> some View{    
         return VStack {
             Spacer()
-            VStack {
+            VStack(spacing: 8) {
                 Text("Estimate Size:")
                     .font(.subheadline)
                     .foregroundColor(.black.opacity(0.4))
-                Text("\(viewModel.estimateFileSize) MB")
+                if viewModel.isCalculatingEstimateSize {
+                    SwiftUI.ProgressView()
+                } else {
+                    Text("\(viewModel.estimateFileSize) MB")
+                }
+                   
                 createCompressButton()
             }
             .padding()
@@ -106,30 +111,6 @@ struct VideoCompressionView: View {
             )
         }
         .ignoresSafeArea()
-
-        
-//        return VStack {
-//            Spacer()
-//            ZStack {
-//                VStack {
-//                    Text("Estimate Size:")
-//                        .font(.subheadline)
-//                        .foregroundColor(.black.opacity(0.4))
-//                    Text("\(80) MB")
-//                    createCompressButton()
-//                }.padding()
-//            }
-//            .background(
-//                backgroundColor
-//                    .cornerRadius(30, corners: [.topLeft, .topRight])
-//                    .shadow(color: Color.black.opacity(0.4), radius: 5, x: 2, y: 0)
-//            )
-//            .frame(maxHeight: .infinity, alignment: .bottom)
-//            .ignoresSafeArea()
-//        }
-//        .ignoresSafeArea()
-//
-//        .contentShape(Rectangle())
     }
     
     
@@ -226,6 +207,12 @@ struct VideoCompressionView: View {
     
     private func compressVideo() {
         viewModel.compress()
+    }
+    
+    private func dismiss() {
+        withAnimation(Animation.easeInOut(duration: 0.8)) {
+            isActive.wrappedValue = false
+        }
     }
 }
 

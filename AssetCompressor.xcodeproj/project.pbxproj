@@ -223,6 +223,8 @@
 		383B904027D21BBB0020C204 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				382EDD2C27C50989001D9D0A /* NavigationBar.swift */,
+				382EDD2627C3B45A001D9D0A /* CircularContainerView.swift */,
 				383B904127D21BD80020C204 /* TextFieldFloatingStyle.swift */,
 				383B904327D2240E0020C204 /* FloatingLabelTextField.swift */,
 				383B904B27D368CA0020C204 /* RoundCorner.swift */,
@@ -257,6 +259,7 @@
 		383E1ABE27BE442500E06B99 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				38A75B2F27E9ECC7006F9453 /* View */,
 				388C33D327D61C6800E13F62 /* Libraries */,
 				383B904527D346C80020C204 /* ViewModel */,
 				383B904027D21BBB0020C204 /* Controls */,
@@ -264,15 +267,9 @@
 				38A0CC4327D0B9AB00B0F25A /* VideoEditor */,
 				383E1ABF27BE442500E06B99 /* AssetCompressorApp.swift */,
 				383E1AC027BE442500E06B99 /* ContentView.swift */,
-				38E68F1927C0445A00112A4B /* MainView.swift */,
 				383E1AC127BE442600E06B99 /* Assets.xcassets */,
-				382EDD1727C1D5A0001D9D0A /* Color+Extensions.swift */,
 				382EDD1A27C249EF001D9D0A /* SwiftUITestView.swift */,
 				382EDD1D27C3658F001D9D0A /* ImagePicker.swift */,
-				382EDD2027C368D7001D9D0A /* MainMenuItem.swift */,
-				382EDD2627C3B45A001D9D0A /* CircularContainerView.swift */,
-				382EDD2927C3BB23001D9D0A /* VideoCompressionView.swift */,
-				382EDD2C27C50989001D9D0A /* NavigationBar.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -352,6 +349,7 @@
 		38A0CC4727D0D80F00B0F25A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				382EDD1727C1D5A0001D9D0A /* Color+Extensions.swift */,
 				382EDD2327C3712D001D9D0A /* SwiftUIView+Extensions.swift */,
 				38A0CC4827D0D81F00B0F25A /* JSON+Extensions.swift */,
 				383B904827D3566C0020C204 /* FileLocation.swift */,
@@ -361,6 +359,16 @@
 				38965A8627E89888009B7839 /* Platform.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		38A75B2F27E9ECC7006F9453 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				38E68F1927C0445A00112A4B /* MainView.swift */,
+				382EDD2027C368D7001D9D0A /* MainMenuItem.swift */,
+				382EDD2927C3BB23001D9D0A /* VideoCompressionView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		B6F2D2B270AF9EBB7E248B86 /* Frameworks */ = {

@@ -11,7 +11,8 @@ struct MainView: View {
     @Namespace private var namespace
     @State private var isShowingPhotoLibrary = false
     @State private var selectedID: String?
-    @State private var showCompressionView = false
+    @State private var showVideoCompressionView = false
+    @State private var showImageCompressionView = false
     @State private var rotate = false
     @State private var inputURL: URL = URL.init(fileURLWithPath: "")
 
@@ -21,13 +22,17 @@ struct MainView: View {
     ]
     
     var body: some View {
-        if(showCompressionView) {
-            VideoCompressionView(isActive: $showCompressionView)
-//                .matchedGeometryEffect(id: "1", in: namespace)
-//                .transition(.fly)
+        if(showVideoCompressionView) {
+            VideoCompressionView(isActive: $showVideoCompressionView)
+                .matchedGeometryEffect(id: "1", in: namespace)
+                .transition(.fly)
         }
         
-        if(showCompressionView == false) {
+        if showImageCompressionView {
+            
+        }
+        
+        if(showVideoCompressionView == false && showImageCompressionView == false) {
             createMainView()
         }
     }
@@ -35,8 +40,8 @@ struct MainView: View {
     private func createMainView() -> some View {
         VStack {
             LazyVGrid(columns: gridItemLayout, spacing: 16, content: {
-                createMenuItem("1")
-                createMenuItem("2")
+                createVideoCompressionMenuItem()
+                createImageCompressionMenuItem()
                 createMenuItem("3")
                 createMenuItem("4")
             })
@@ -57,6 +62,38 @@ struct MainView: View {
         .ignoresSafeArea()
     }
     
+    private func createVideoCompressionMenuItem() -> some View {
+        let id = "1"
+        return MainMenuItem(
+            id: id,
+            namespace: namespace,
+            title: "Video",
+            image: Image(systemName: "video"),
+            onTapped: {
+                withAnimation(Animation.easeInOut(duration: 0.8)) {
+                    selectedID = id
+                    showVideoCompressionView = true
+                }
+            }
+        )
+    }
+    
+    private func createImageCompressionMenuItem() -> some View {
+        let id = "2"
+        return MainMenuItem(
+            id: id,
+            namespace: namespace,
+            title: "Image",
+            image: Image(systemName: "photo"),
+            onTapped: {
+                withAnimation(Animation.easeInOut(duration: 0.8)) {
+                    selectedID = id
+                    showVideoCompressionView = true
+                }
+            }
+        )
+    }
+    
     private func createMenuItem(_ id: String) -> some View {
         return MainMenuItem(
             id: id,
@@ -67,7 +104,7 @@ struct MainView: View {
 //                isShowingPhotoLibrary = true
                 withAnimation(Animation.easeInOut(duration: 0.8)) {
                     selectedID = id
-                    showCompressionView = true
+                    showVideoCompressionView = true
                 }
             }
         )
@@ -79,9 +116,6 @@ struct MainView: View {
         withAnimation(Animation.easeOut(duration: 0.5)) {
             selectedID = "1"
         }
-    }
-    
-    private func onselectPhotoFromMacOS() {
     }
 }
 

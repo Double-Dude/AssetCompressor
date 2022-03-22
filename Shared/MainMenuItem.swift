@@ -23,6 +23,7 @@ struct MainMenuItem: View {
                     .foregroundColor(Color.fromHex(0x305ED6))
                     .font(Font.title)
                     .bold()
+                    .frame(maxWidth: .infinity, alignment: .leading)
 
                 image
                     .resizable()

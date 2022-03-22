@@ -19,6 +19,7 @@ struct VideoCompressionView: View {
    
     @State private var scrollOffset: Float = 60
     @State private var isShowingPhotoLibrary = false
+    @State private var isShowingBottomSheet = false
     private var subscribers: Set<AnyCancellable> = []
 
     init(isActive: Binding<Bool>) {
@@ -43,9 +44,10 @@ struct VideoCompressionView: View {
 
             #endif
             
-
-            createBottomSheet()
-            
+            if isShowingBottomSheet {
+                createBottomSheet()
+            }
+        
             if(viewModel.compressing) {
                 ProgressView(progress: viewModel.progress)
             }
@@ -74,9 +76,13 @@ struct VideoCompressionView: View {
             viewModel.onCompletion = {
                 dismiss()
             }
+      
             Task {
                 try! await Task.sleep(seconds: 1)
                 showVideoPicker()
+                withAnimation(Animation.easeInOut(duration: 1)) {
+                    isShowingBottomSheet = true
+                }
             }
         }
     }

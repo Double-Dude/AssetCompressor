@@ -16,12 +16,12 @@ struct AssetCompressorApp: App {
     var body: some Scene {
         WindowGroup {
             MainView().onAppear {
-//                var url = FileLocation.getOrCreateCleanOnLaunchURL()
-//                url.appendPathComponent("test.txt")
-//                debugPrint("url: \(url)")
-//                debugPrint(url.lastPathComponent)
-//                FileManager.default.createFile(atPath: url.path, contents: nil)
-                
+                do {
+                    let url = FileLocation.getOrCreateCleanOnLaunchURL()
+                    try FileManager.default.removeItem(at: url)
+                } catch {
+                    debugPrint(error)
+                }
             }
         }
     }

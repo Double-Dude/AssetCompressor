@@ -107,14 +107,11 @@ import Foundation
              do {
                  let url = try await videoEditor.execute(request)
                  debugPrint("Completed \(url.path)")
-//                 UISaveVideoAtPathToSavedPhotosAlbum(url.path, self, nil, nil)
-//                 try FileManager.default.removeItem(at: url)
                  self.progress = 1
                  try! await Task.sleep(seconds: 1.5)
                  saveVideo(url)
                  compressing = false
                  self.progress = 0
-//                 onCompletion?()
              } catch {
                  debugPrint("Failed \(error.localizedDescription)")
                  compressing = false
@@ -125,24 +122,23 @@ import Foundation
     
     private func saveVideo(_ videoURL: URL) {
         #if os(iOS)
-//        UISaveVideoAtPathToSavedPhotosAlbum(url.path, self, nil, nil)
+        UISaveVideoAtPathToSavedPhotosAlbum(videoURL.path, self, nil, nil)
+        onCompletion?()
         #else
         DispatchQueue.main.async { [weak self] in
-            guard let self = self else {
+            guard let weakSelf = self else {
                 return
             }
             let savePanel = NSSavePanel()
-            let name = self.selectedVideoURL!.appendingToFileName("_compressed").replaceExtension("mp4").lastPathComponent
+            let name = weakSelf.selectedVideoURL!.appendingToFileName("_compressed").replaceExtension("mp4").lastPathComponent
             savePanel.nameFieldStringValue = name
             savePanel.canCreateDirectories = true
             
-//            savePanel()
-            savePanel.begin { result in
+            savePanel.begin { [weak self] result in
                 if result == NSApplication.ModalResponse.OK {
                     debugPrint("Result: \(result)")
                     FileManager.default.createFile(atPath: savePanel.url!.path, contents: try! Data(contentsOf: videoURL))
-                    
-//                    try! FileManager().copyItem(at: videoURL, to: savePanel.url!)
+                    self?.onCompletion?()
                 } else {
                     debugPrint("Result Failed: \(result)")
                 }

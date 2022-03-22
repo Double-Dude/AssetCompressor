@@ -9,7 +9,6 @@ import SwiftUI
 
 struct MainView: View {
     @Namespace private var namespace
-    @State private var isShowingPhotoLibrary = false
     @State private var selectedID: String?
     @State private var showVideoCompressionView = false
     @State private var showImageCompressionView = false
@@ -29,7 +28,9 @@ struct MainView: View {
         }
         
         if showImageCompressionView {
-            
+            ImageCompressionView(isActive: $showImageCompressionView)
+                .matchedGeometryEffect(id: "2", in: namespace)
+                .transition(.fly)
         }
         
         if(showVideoCompressionView == false && showImageCompressionView == false) {
@@ -42,20 +43,10 @@ struct MainView: View {
             LazyVGrid(columns: gridItemLayout, spacing: 16, content: {
                 createVideoCompressionMenuItem()
                 createImageCompressionMenuItem()
-                createMenuItem("3")
-                createMenuItem("4")
+                createBulkVideoCompressionMenuItem()
+                createBulkImageCompressionMenuItem()
             })
             .padding()
-            .sheet(isPresented: $isShowingPhotoLibrary) {
-                #if os(iOS)
-                ImagePicker{ url in
-                    isShowingPhotoLibrary = false
-                    if let url = url {
-                        onVideoSelected(videoURL: url)
-                    }
-                }
-                #endif
-            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(LinearGradient(gradient: Gradient(colors: [.fromHex(0xFF48C6EF), .fromHex(0xFF6F86D6)]), startPoint: .leading, endPoint: .trailing))
@@ -88,7 +79,39 @@ struct MainView: View {
             onTapped: {
                 withAnimation(Animation.easeInOut(duration: 0.8)) {
                     selectedID = id
-                    showVideoCompressionView = true
+                    showImageCompressionView = true
+                }
+            }
+        )
+    }
+    
+    private func createBulkVideoCompressionMenuItem() -> some View {
+        let id = "3"
+        return MainMenuItem(
+            id: id,
+            namespace: namespace,
+            title: "Bulk",
+            image: Image(systemName: "video"),
+            onTapped: {
+                withAnimation(Animation.easeInOut(duration: 0.8)) {
+                    selectedID = id
+                    showImageCompressionView = true
+                }
+            }
+        )
+    }
+    
+    private func createBulkImageCompressionMenuItem() -> some View {
+        let id = "4"
+        return MainMenuItem(
+            id: id,
+            namespace: namespace,
+            title: "Bulk",
+            image: Image(systemName: "photo"),
+            onTapped: {
+                withAnimation(Animation.easeInOut(duration: 0.8)) {
+                    selectedID = id
+                    showImageCompressionView = true
                 }
             }
         )

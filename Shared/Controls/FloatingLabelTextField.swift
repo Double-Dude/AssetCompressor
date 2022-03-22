@@ -39,6 +39,7 @@ struct FloatingLabelTextField<V> : View {
         TextField("", text: text, onEditingChanged: { isFocused in
             onEditingChanged?(isFocused)
         })
+//        .doneButton()
             .textFieldStyle(TextFieldFloatingStyle(placeholder: placeholder, placeholderColor: .gray, placeholderBackgroundColor: .white, isEditing: !text.wrappedValue.isEmpty))
     }
     

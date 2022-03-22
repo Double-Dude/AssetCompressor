@@ -23,6 +23,24 @@ struct AssetCompressorApp: App {
                     debugPrint(error)
                 }
             }
+            #if os(iOS)
+            .doneButton()
+            #endif
         }
     }
+}
+
+extension View {
+    #if os(iOS)
+    func doneButton() -> some View {
+        toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                Spacer()
+                Button("Done") {
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                }
+            }
+        }
+    }
+    #endif
 }

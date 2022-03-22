@@ -74,6 +74,8 @@
 		38A75B3227E9ED5C006F9453 /* ImageCompressionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A75B3027E9ED5C006F9453 /* ImageCompressionView.swift */; };
 		38A75B3427E9EF0C006F9453 /* CompressionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A75B3327E9EF0C006F9453 /* CompressionItem.swift */; };
 		38A75B3527E9EF0C006F9453 /* CompressionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A75B3327E9EF0C006F9453 /* CompressionItem.swift */; };
+		38A75B3727E9EFB0006F9453 /* ImageCompressionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A75B3627E9EFB0006F9453 /* ImageCompressionViewModel.swift */; };
+		38A75B3827E9EFB0006F9453 /* ImageCompressionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A75B3627E9EFB0006F9453 /* ImageCompressionViewModel.swift */; };
 		38B69B2227E5D8440098FBC0 /* FloatingLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383B904327D2240E0020C204 /* FloatingLabelTextField.swift */; };
 		38B69B2327E5D84E0098FBC0 /* TextFieldFloatingStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383B904127D21BD80020C204 /* TextFieldFloatingStyle.swift */; };
 		38B69B2427E5D8540098FBC0 /* VideoCompressionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383B904627D346E10020C204 /* VideoCompressionViewModel.swift */; };
@@ -155,6 +157,7 @@
 		38A0CC4827D0D81F00B0F25A /* JSON+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+Extensions.swift"; sourceTree = "<group>"; };
 		38A75B3027E9ED5C006F9453 /* ImageCompressionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCompressionView.swift; sourceTree = "<group>"; };
 		38A75B3327E9EF0C006F9453 /* CompressionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompressionItem.swift; sourceTree = "<group>"; };
+		38A75B3627E9EFB0006F9453 /* ImageCompressionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCompressionViewModel.swift; sourceTree = "<group>"; };
 		38E68F1927C0445A00112A4B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		38E68F1C27C0450A00112A4B /* VideoEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoEditor.swift; sourceTree = "<group>"; };
 		38E68F1F27C047E800112A4B /* FFmpegVideoCompressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFmpegVideoCompressor.swift; sourceTree = "<group>"; };
@@ -243,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				383B904627D346E10020C204 /* VideoCompressionViewModel.swift */,
+				38A75B3627E9EFB0006F9453 /* ImageCompressionViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -638,6 +642,7 @@
 				38A75B3127E9ED5C006F9453 /* ImageCompressionView.swift in Sources */,
 				383B904727D346E10020C204 /* VideoCompressionViewModel.swift in Sources */,
 				383B904C27D368CA0020C204 /* RoundCorner.swift in Sources */,
+				38A75B3727E9EFB0006F9453 /* ImageCompressionViewModel.swift in Sources */,
 				382EDD2427C3712D001D9D0A /* SwiftUIView+Extensions.swift in Sources */,
 				382EDD1E27C3658F001D9D0A /* ImagePicker.swift in Sources */,
 				382EDD1B27C249EF001D9D0A /* SwiftUITestView.swift in Sources */,
@@ -666,6 +671,7 @@
 				383B904F27D39A310020C204 /* WindowExtensions.swift in Sources */,
 				38302B8527C09ED600EA55E4 /* FFmpegCommandFactory.swift in Sources */,
 				382EDD2B27C3BB23001D9D0A /* VideoCompressionView.swift in Sources */,
+				38A75B3827E9EFB0006F9453 /* ImageCompressionViewModel.swift in Sources */,
 				382EDD2227C368D7001D9D0A /* MainMenuItem.swift in Sources */,
 				38965A8827E89888009B7839 /* Platform.swift in Sources */,
 				383E1AEA27BE442600E06B99 /* ContentView.swift in Sources */,

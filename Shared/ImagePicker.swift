@@ -11,13 +11,14 @@ import SwiftUI
 import PhotosUI
 
 struct ImagePicker: UIViewControllerRepresentable {
+    let filterType: PHPickerFilter
     let onCompletion: (URL?) -> Void
     @Environment(\.presentationMode) var presentationMode
      
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> PHPickerViewController {
         var configuration = PHPickerConfiguration()
         configuration.selectionLimit = 1
-        configuration.filter = .videos
+        configuration.filter = filterType
         let picker = PHPickerViewController(configuration: configuration)
         picker.delegate = context.coordinator
         return picker
@@ -46,8 +47,8 @@ struct ImagePicker: UIViewControllerRepresentable {
                 }
                 return
             }
-
-            provider.loadFileRepresentation(forTypeIdentifier: UTType.movie.identifier) { [weak self] url, error in
+            
+            provider.loadFileRepresentation(forTypeIdentifier: createIdentifier()) { [weak self] url, error in
                 guard let url = url else {
                     self?.parent.onCompletion(nil)
                     return
@@ -81,9 +82,18 @@ struct ImagePicker: UIViewControllerRepresentable {
             }
         }
         
+        private func createIdentifier() -> String {
+            switch parent.filterType {
+            case .videos:
+                return UTType.movie.identifier
+            case .images:
+                return UTType.image.identifier
+            default:
+                return UTType.video.identifier
+            }
+        }
         
-        
-        
+     
     }
 }
 #endif

@@ -17,10 +17,8 @@ struct VideoCompressionView: View {
     @Namespace private var defaultNameSpace
     @State private var rotate = false
    
-    @State private var scrollOffset: Float = 60
     @State private var isShowingPhotoLibrary = false
     @State private var isShowingBottomSheet = false
-    private var subscribers: Set<AnyCancellable> = []
 
     init(isActive: Binding<Bool>) {
         self.isActive = isActive
@@ -62,7 +60,7 @@ struct VideoCompressionView: View {
         )
 #if os(iOS)
         .sheet(isPresented: $isShowingPhotoLibrary) {
-            ImagePicker{ url in
+            ImagePicker(filterType: .videos){ url in
                 isShowingPhotoLibrary = false
                 guard let url = url else {
                     dismiss()
@@ -155,22 +153,6 @@ struct VideoCompressionView: View {
         }
         .offset(x: 0, y: 30)
         .ignoresSafeArea()
-    }
-    
-    private func createBottomSheetContent(_ geometry: GeometryProxy) -> some View {
-        print(geometry.size.width, geometry.size.height)
-
-        
-        return VStack {
-            Text("Estimate Size:")
-                .font(.subheadline)
-                .foregroundColor(.black.opacity(0.4))
-            Text("\(80) MB")
-            createCompressButton()
-        }
-        .frame(alignment: .bottom)
-        .padding()
-        .padding(.bottom)
     }
     
     private func createCompressButton() -> some View{

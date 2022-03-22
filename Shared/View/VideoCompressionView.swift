@@ -194,58 +194,20 @@ struct VideoCompressionView: View {
     }
     
   
-    private func createFrameRateItem() -> VideoCompressionTextFieldItem {
-        VideoCompressionTextFieldItem(title: "Frame Rate", subtitle: "The higher the frame rate, the smoother the video is.", value: $viewModel.frameRate)
+    private func createFrameRateItem() -> CompressionTextFieldItem {
+        CompressionTextFieldItem(title: "Frame Rate", subtitle: "The higher the frame rate, the smoother the video is.", value: $viewModel.frameRate)
     }
     
     private func createResolutionItem() -> some View {
-        
-        VideoCompressionCustomListItem(
-            title: "Resolution",
-            subtitle: "The width and height have to be even numbers.",
-            valueString: String("\(viewModel.width)x\(viewModel.height)")
-        ) {
-            HStack {
-                createResolutionItemTextField(placeholder: "Width", text: $viewModel.width)
-                createResolutionItemTextField(placeholder: "Height", text: $viewModel.height)
-            }
-            .padding(.top, 8)
-        }
+        CompressionResolutionItem(width: $viewModel.width, height: $viewModel.height)
     }
     
-    private func createResolutionItemTextField(placeholder: String, text: Binding<String>) -> some View{
-        FloatingLabelTextField(
-            placeholder: placeholder,
-            text: text,
-            onEditingChanged: { isFocused in
-                if(isFocused) { return }
-
-                let value = text.wrappedValue.isEmpty ? 0 : Int(text.wrappedValue)!
-                print("Test: \(Int(text.wrappedValue)! >> 2)")
-                if(value == 0) {
-                    text.wrappedValue = "2"
-                } else if(value % 2 == 1 ) {
-                    text.wrappedValue = String(value + 1)
-                }
-            }
-        )
-        .onChange(of: text.wrappedValue) { [oldValue = text.wrappedValue] newValue in
-            let convertable = Int(newValue) != nil
-            if convertable == false {
-                text.wrappedValue = oldValue
-            }
-        }
-        #if os(iOS)
-        .keyboardType(.numberPad)
-        #endif
-    }
-    
-    private func createBitrateItem() -> VideoCompressionTextFieldItem {
-        VideoCompressionTextFieldItem(title: "Bitrate", subtitle: "The higher the bitrate, the larger the video size is.", value: $viewModel.bitrate)
+    private func createBitrateItem() -> CompressionTextFieldItem {
+        CompressionTextFieldItem(title: "Bitrate", subtitle: "The higher the bitrate, the larger the video size is.", value: $viewModel.bitrate)
     }
     
     private func createPlaybackSpeedItem() -> some View {
-        VideoCompressionSliderItem(
+        CompressionSliderItem(
             title: "Playback Speed",
             value: $viewModel.playbackSpeed,
             valueString: String(format: "%.1fx", viewModel.playbackSpeed),
@@ -291,92 +253,6 @@ struct GeometryGetter: View {
     }
 }
 
-struct VideoCompressionSliderItem : View{
-    let title: String
-    var subtitle: String?
-    @Binding var value: Float
-    var valueString: String
-    let range: ClosedRange<Float>
-    var step: Float = 1
-    
-    var body: some View {
-        return VideoCompressionCustomListItem(title: title, subtitle: subtitle, valueString: valueString) {
-            Slider(value: $value, in: range, step: step) { _ in
-
-            }
-        }
-    }
-}
-
-struct VideoCompressionTextFieldItem : View {
-    let title: String
-    var subtitle: String?
-    let value: Binding<String>
-    
-    var body: some View {
-        VideoCompressionCustomListItem(title: title, subtitle: subtitle, valueString: value.wrappedValue) {
-            createMinimumValueTextField(placeholder: title, text: value)
-                .padding(.top, 8)
-        }
-    }
-    
-    private func createMinimumValueTextField(placeholder: String, text: Binding<String>) -> some View {
-        FloatingLabelTextField(
-            placeholder: placeholder,
-            text: text,
-            onEditingChanged: { isFocused in
-                if(isFocused) { return }
-                    
-                let value = text.wrappedValue.isEmpty ? 0 : Int(text.wrappedValue)!
-                if(value == 0) {
-                    text.wrappedValue = "1"
-                }
-            }
-        )
-        .onChange(of: text.wrappedValue) { [oldValue = text.wrappedValue] newValue in
-            let convertable = Int(newValue) != nil
-            if convertable == false {
-                text.wrappedValue = oldValue
-            }
-        }
-        #if os(iOS)
-        .keyboardType(.numberPad)
-        #endif
-    }
-}
-
-struct VideoCompressionCustomListItem<ContentView: View> : View{
-    let title: String
-    var subtitle: String?
-    var valueString: String?
-    var createContentView: () -> ContentView
-
-    var body: some View {
-        return CircularContainerView(backgroundColor: Color.white) {
-            VStack(alignment: .leading, spacing: 8) {
-                createTitleLine()
-                
-                if let subtitle = subtitle {
-                   Text(subtitle)
-                       .font(.subheadline)
-                       .foregroundColor(.black.opacity(0.4))
-                }
-                
-                createContentView()
-            }
-        }
-    }
-    
-    private func createTitleLine() -> some View {
-        HStack {
-            Text("\(title):")
-            if let valueString = valueString {
-                Text(valueString)
-            }
-        }
-        .font(.title2)
-    }
-}
 
 struct VideoCompressionView_Previews: PreviewProvider {
     static var previews: some View {

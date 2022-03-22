@@ -70,6 +70,10 @@
 		38A0CC4627D0D78500B0F25A /* VideoMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0CC4427D0D78500B0F25A /* VideoMetadata.swift */; };
 		38A0CC4927D0D81F00B0F25A /* JSON+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0CC4827D0D81F00B0F25A /* JSON+Extensions.swift */; };
 		38A0CC4A27D0D81F00B0F25A /* JSON+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0CC4827D0D81F00B0F25A /* JSON+Extensions.swift */; };
+		38A75B3127E9ED5C006F9453 /* ImageCompressionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A75B3027E9ED5C006F9453 /* ImageCompressionView.swift */; };
+		38A75B3227E9ED5C006F9453 /* ImageCompressionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A75B3027E9ED5C006F9453 /* ImageCompressionView.swift */; };
+		38A75B3427E9EF0C006F9453 /* CompressionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A75B3327E9EF0C006F9453 /* CompressionItem.swift */; };
+		38A75B3527E9EF0C006F9453 /* CompressionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A75B3327E9EF0C006F9453 /* CompressionItem.swift */; };
 		38B69B2227E5D8440098FBC0 /* FloatingLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383B904327D2240E0020C204 /* FloatingLabelTextField.swift */; };
 		38B69B2327E5D84E0098FBC0 /* TextFieldFloatingStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383B904127D21BD80020C204 /* TextFieldFloatingStyle.swift */; };
 		38B69B2427E5D8540098FBC0 /* VideoCompressionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383B904627D346E10020C204 /* VideoCompressionViewModel.swift */; };
@@ -149,6 +153,8 @@
 		38965A8927E89E39009B7839 /* AssetCompressor (macOS)Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "AssetCompressor (macOS)Debug.entitlements"; sourceTree = "<group>"; };
 		38A0CC4427D0D78500B0F25A /* VideoMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoMetadata.swift; sourceTree = "<group>"; };
 		38A0CC4827D0D81F00B0F25A /* JSON+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+Extensions.swift"; sourceTree = "<group>"; };
+		38A75B3027E9ED5C006F9453 /* ImageCompressionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCompressionView.swift; sourceTree = "<group>"; };
+		38A75B3327E9EF0C006F9453 /* CompressionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompressionItem.swift; sourceTree = "<group>"; };
 		38E68F1927C0445A00112A4B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		38E68F1C27C0450A00112A4B /* VideoEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoEditor.swift; sourceTree = "<group>"; };
 		38E68F1F27C047E800112A4B /* FFmpegVideoCompressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFmpegVideoCompressor.swift; sourceTree = "<group>"; };
@@ -367,6 +373,8 @@
 				38E68F1927C0445A00112A4B /* MainView.swift */,
 				382EDD2027C368D7001D9D0A /* MainMenuItem.swift */,
 				382EDD2927C3BB23001D9D0A /* VideoCompressionView.swift */,
+				38A75B3027E9ED5C006F9453 /* ImageCompressionView.swift */,
+				38A75B3327E9EF0C006F9453 /* CompressionItem.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -623,9 +631,11 @@
 				383E1AE927BE442600E06B99 /* ContentView.swift in Sources */,
 				38E68F1A27C0445A00112A4B /* MainView.swift in Sources */,
 				38A0CC4927D0D81F00B0F25A /* JSON+Extensions.swift in Sources */,
+				38A75B3427E9EF0C006F9453 /* CompressionItem.swift in Sources */,
 				38467A7C27E49D7E00D1017B /* URL+Extensions.swift in Sources */,
 				385A61FF27E34714008E9862 /* Task+Extensions.swift in Sources */,
 				383B904227D21BD80020C204 /* TextFieldFloatingStyle.swift in Sources */,
+				38A75B3127E9ED5C006F9453 /* ImageCompressionView.swift in Sources */,
 				383B904727D346E10020C204 /* VideoCompressionViewModel.swift in Sources */,
 				383B904C27D368CA0020C204 /* RoundCorner.swift in Sources */,
 				382EDD2427C3712D001D9D0A /* SwiftUIView+Extensions.swift in Sources */,
@@ -640,6 +650,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				382EDD2827C3B45A001D9D0A /* CircularContainerView.swift in Sources */,
+				38A75B3527E9EF0C006F9453 /* CompressionItem.swift in Sources */,
 				38E68F2127C047E800112A4B /* FFmpegVideoCompressor.swift in Sources */,
 				38E68F1E27C0450A00112A4B /* VideoEditor.swift in Sources */,
 				38302B8227C08A3500EA55E4 /* FFmpegCommandBuilder.swift in Sources */,
@@ -647,6 +658,7 @@
 				38B69B2627E5D86D0098FBC0 /* ProgressView.swift in Sources */,
 				38B69B2527E5D85B0098FBC0 /* URL+Extensions.swift in Sources */,
 				382EDD1927C1D5A0001D9D0A /* Color+Extensions.swift in Sources */,
+				38A75B3227E9ED5C006F9453 /* ImageCompressionView.swift in Sources */,
 				382EDD2E27C50989001D9D0A /* NavigationBar.swift in Sources */,
 				38B69B2427E5D8540098FBC0 /* VideoCompressionViewModel.swift in Sources */,
 				385A620027E34714008E9862 /* Task+Extensions.swift in Sources */,

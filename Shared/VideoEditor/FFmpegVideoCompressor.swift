@@ -11,6 +11,8 @@ import Foundation
 class FFmpegVideoCompressor : VideoEditor {
     let ffmpegCommandFactory: FFmpegCommandFactory
     
+    private var compressionSession: FFmpegSession?
+    
     init(ffmpegCommandFactory: FFmpegCommandFactory) {
         self.ffmpegCommandFactory = ffmpegCommandFactory
     }
@@ -55,8 +57,9 @@ class FFmpegVideoCompressor : VideoEditor {
 
                 debugPrint("totalDuration: \(totalDuration)")
 
-                FFmpegKit.executeAsync(command) { session in
-                    
+                FFmpegKit.executeAsync(command) { [weak self] session in
+                    self?.compressionSession?.cancel()
+                    self?.compressionSession = session
                     if(ReturnCode.isSuccess(session!.getReturnCode())) {
                         continuation.resume(with: .success(request.outputFilePath))
                     } else {

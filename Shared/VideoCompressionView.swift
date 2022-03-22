@@ -223,7 +223,15 @@ struct VideoCompressionView: View {
                 }
             }
         )
-//        .keyboardType(.numberPad)
+        .onChange(of: text.wrappedValue) { [oldValue = text.wrappedValue] newValue in
+            let convertable = Int(newValue) != nil
+            if convertable == false {
+                text.wrappedValue = oldValue
+            }
+        }
+        #if os(iOS)
+        .keyboardType(.numberPad)
+        #endif
     }
     
     private func createBitrateItem() -> VideoCompressionTextFieldItem {
@@ -250,6 +258,9 @@ struct VideoCompressionView: View {
     }
     
     private func compressVideo() {
+        #if os(macOS)
+        NSApp.keyWindow?.makeFirstResponder(nil)
+        #endif
         viewModel.compress()
     }
     
@@ -315,9 +326,16 @@ struct VideoCompressionTextFieldItem : View {
                     text.wrappedValue = "1"
                 }
             }
-            
         )
-//        .keyboardType(.numberPad)
+        .onChange(of: text.wrappedValue) { [oldValue = text.wrappedValue] newValue in
+            let convertable = Int(newValue) != nil
+            if convertable == false {
+                text.wrappedValue = oldValue
+            }
+        }
+        #if os(iOS)
+        .keyboardType(.numberPad)
+        #endif
     }
 }
 

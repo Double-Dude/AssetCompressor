@@ -77,7 +77,6 @@ import Foundation
     }
     
     func compress() {
-        NSApp.keyWindow?.makeFirstResponder(nil)
         delayToCalculateEstimateSizeTask?.cancel()
 
         compressing = true
@@ -171,21 +170,25 @@ import Foundation
     }
     
     func calculateEstimateSize() async throws  {
-        guard let orginalMetadata = metadata else {
+        guard let orginalMetadata = metadata, let bitrate = Int(bitrate), let frameRate = Int(frameRate), let width = Int(width), let height = Int(height), let selectedVideoURL = selectedVideoURL else {
             return
         }
         
-        let name = selectedVideoURL!.appendingToFileName("_estimate").lastPathComponent
+        if width == 0 || height == 0 || width % 2 == 1 || height % 2 == 1 {
+            return
+        }
+        
+        let name = selectedVideoURL.appendingToFileName("_estimate").lastPathComponent
         let outputURL = FileLocation.getOrCreateCleanOnLaunchURL().appendingPathComponent(name)
         let trimEnd = orginalMetadata.duration < 15.0 ? orginalMetadata.duration : 15.0
         let request = VideoCompressionRequest(
-             bitRate: Int(bitrate)!,
+             bitRate: bitrate,
              playbackSpeed: Double(playbackSpeed),
-             outputFps: Int(frameRate)!,
-             outputWidth: Int(width)!,
-             outputHeight: Int(height)!,
+             outputFps: frameRate,
+             outputWidth: width,
+             outputHeight: height,
              isAudioEnabled: isAudioEnabled,
-             inputFilePaths: [selectedVideoURL!],
+             inputFilePaths: [selectedVideoURL],
              outputFilePath: outputURL,
              trimStart: 0,
              trimEnd: trimEnd,

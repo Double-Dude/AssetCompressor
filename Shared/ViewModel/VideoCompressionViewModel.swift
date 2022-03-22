@@ -50,12 +50,12 @@ import Foundation
     @Published var progress: Double = 0.0
     @Published var compressing: Bool = false
     @Published var isCalculatingEstimateSize: Bool = false
+    @Published var hasAudioStream: Bool = true
     var onCompletion: (() -> Void)?
 
     private var videoEditor = FFmpegVideoCompressor(ffmpegCommandFactory: FFmpegCommandFactory())
     private var selectedVideoURL: URL?
     private var metadata: VideoMetadata?
-//    private var subscribers: Set<AnyCancellable> = []
     private var compressionProgress = Progress()
     private var progressObservation: NSKeyValueObservation?
     private var delayToCalculateEstimateSizeTask: Task<(), Never>?
@@ -70,38 +70,16 @@ import Foundation
             width = String(metadata.width)
             height = String(metadata.height)
             bitrate = String(metadata.bitrate)
+            isAudioEnabled = metadata.hasAudio
+            hasAudioStream = metadata.hasAudio
             estimateFileSize = convertBytesToFormattedString(Double(metadata.size))
-            
-            
-//            subscribers.forEach { cancellable in
-//                cancellable.cancel()
-//            }
-//            subscribers.removeAll()
-            
-//            $bitrate.sink {[weak self] value in
-//                guard let self = self else { return }
-//                if(value == self.bitrate) { return }
-//
-////                self.calculateEstimateSize()
-//                self.delayToCalculateEstimateSize(bitrate: value, playback: self.playbackSpeed, isAudioEnabled: self.isAudioEnabled)
-//            }
-//            .store(in: &subscribers)
-//            $playbackSpeed.sink {[weak self] value in
-//                guard let self = self else { return }
-//                if(value == self.playbackSpeed) { return }
-//
-//                self.delayToCalculateEstimateSize(bitrate: self.bitrate, playback: value, isAudioEnabled: self.isAudioEnabled)
-//            }.store(in: &subscribers)
-//            $isAudioEnabled.sink {[weak self] value in
-//                guard let self = self else { return }
-//                if(value == self.isAudioEnabled) { return }
-//
-//                self.delayToCalculateEstimateSize(bitrate: self.bitrate, playback: self.playbackSpeed, isAudioEnabled: value)
-//            }.store(in: &subscribers)
         }
     }
     
     func compress() {
+        NSApp.keyWindow?.makeFirstResponder(nil)
+        delayToCalculateEstimateSizeTask?.cancel()
+
         compressing = true
         compressionProgress = Progress()
         progressObservation = compressionProgress.observe(\Progress.fractionCompleted, options: .new) { progress, change in
@@ -110,6 +88,8 @@ import Foundation
             }
         }
 
+        let name = selectedVideoURL!.appendingToFileName("_compressed").lastPathComponent
+        let outputURL = FileLocation.getOrCreateCleanOnLaunchURL().appendingPathComponent(name)
         let request = VideoCompressionRequest(
              bitRate: Int(bitrate)!,
              playbackSpeed: Double(playbackSpeed),
@@ -118,7 +98,7 @@ import Foundation
              outputHeight: Int(height)!,
              isAudioEnabled: isAudioEnabled,
              inputFilePaths: [selectedVideoURL!],
-             outputFilePath: selectedVideoURL!.appendingToPathBeforeExtension("_compressed"),
+             outputFilePath: outputURL,
              trimStart: nil,
              trimEnd: nil,
              progress: compressionProgress
@@ -128,20 +108,49 @@ import Foundation
              do {
                  let url = try await videoEditor.execute(request)
                  debugPrint("Completed \(url.path)")
-                 UISaveVideoAtPathToSavedPhotosAlbum(url.path, self, nil, nil)
+//                 UISaveVideoAtPathToSavedPhotosAlbum(url.path, self, nil, nil)
 //                 try FileManager.default.removeItem(at: url)
                  self.progress = 1
                  try! await Task.sleep(seconds: 1.5)
+                 saveVideo(url)
                  compressing = false
-                 delayToCalculateEstimateSizeTask?.cancel()
                  self.progress = 0
-                 onCompletion?()
+//                 onCompletion?()
              } catch {
                  debugPrint("Failed \(error.localizedDescription)")
                  compressing = false
                  self.progress = 0
              }
          }
+    }
+    
+    private func saveVideo(_ videoURL: URL) {
+        #if os(iOS)
+//        UISaveVideoAtPathToSavedPhotosAlbum(url.path, self, nil, nil)
+        #else
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {
+                return
+            }
+            let savePanel = NSSavePanel()
+            let name = self.selectedVideoURL!.appendingToFileName("_compressed").replaceExtension("mp4").lastPathComponent
+            savePanel.nameFieldStringValue = name
+            savePanel.canCreateDirectories = true
+            
+//            savePanel()
+            savePanel.begin { result in
+                if result == NSApplication.ModalResponse.OK {
+                    debugPrint("Result: \(result)")
+                    FileManager.default.createFile(atPath: savePanel.url!.path, contents: try! Data(contentsOf: videoURL))
+                    
+//                    try! FileManager().copyItem(at: videoURL, to: savePanel.url!)
+                } else {
+                    debugPrint("Result Failed: \(result)")
+                }
+            }
+
+        }
+        #endif
     }
     
     func delayToCalculateEstimateSize() {
@@ -166,7 +175,9 @@ import Foundation
             return
         }
         
-        let trimEnd = orginalMetadata.duration < 10.0 ? orginalMetadata.duration : 10.0
+        let name = selectedVideoURL!.appendingToFileName("_estimate").lastPathComponent
+        let outputURL = FileLocation.getOrCreateCleanOnLaunchURL().appendingPathComponent(name)
+        let trimEnd = orginalMetadata.duration < 15.0 ? orginalMetadata.duration : 15.0
         let request = VideoCompressionRequest(
              bitRate: Int(bitrate)!,
              playbackSpeed: Double(playbackSpeed),
@@ -175,10 +186,10 @@ import Foundation
              outputHeight: Int(height)!,
              isAudioEnabled: isAudioEnabled,
              inputFilePaths: [selectedVideoURL!],
-             outputFilePath: selectedVideoURL!.appendingToPathBeforeExtension("_estimate"),
+             outputFilePath: outputURL,
              trimStart: 0,
              trimEnd: trimEnd,
-             progress: compressionProgress
+             progress: nil
         )
         
         if calculateEstimateSizeRequest == request { return }
@@ -195,7 +206,7 @@ import Foundation
         debugPrint("url: \(url) -- playback: \(playbackSpeed) -- estimate duration: \(estimatedVideoMetadata.duration)")
         debugPrint("estimate:\(estimatedVideoMetadata)")
     }
-    
+ 
     private func convertBytesToFormattedString(_ size: Double) -> String{
         let sizeInMB = size / 1000 / 1000
         return String(format: "%.1f", sizeInMB)
@@ -211,9 +222,6 @@ import Foundation
     }
     
     deinit {
-//        subscribers.forEach { disposable in
-//            disposable.cancel()
-//        }
         delayToCalculateEstimateSizeTask?.cancel()
     }
 }

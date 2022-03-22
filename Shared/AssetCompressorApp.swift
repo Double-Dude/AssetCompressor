@@ -15,7 +15,14 @@ let safeAreaInsets = getSafeAreaInsets()
 struct AssetCompressorApp: App {
     var body: some Scene {
         WindowGroup {
-            MainView()
+            MainView().onAppear {
+//                var url = FileLocation.getOrCreateCleanOnLaunchURL()
+//                url.appendPathComponent("test.txt")
+//                debugPrint("url: \(url)")
+//                debugPrint(url.lastPathComponent)
+//                FileManager.default.createFile(atPath: url.path, contents: nil)
+                
+            }
         }
     }
 }

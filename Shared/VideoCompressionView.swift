@@ -29,6 +29,7 @@ struct VideoCompressionView: View {
     
     var body: some View {
         ZStack {
+            #if os(iOS)
             ScrollView {
                 createBody()
             }
@@ -36,6 +37,12 @@ struct VideoCompressionView: View {
             .safeAreaInset(edge: .bottom) {
                 Color.clear.frame(height: 130)
             }
+            #else
+            createBody()
+                .offset(y: 50)
+
+            #endif
+            
 
             createBottomSheet()
             
@@ -43,7 +50,7 @@ struct VideoCompressionView: View {
                 ProgressView(progress: viewModel.progress)
             }
         }
-        .overlay(NavigationBar {
+        .overlay(NavigationBar(title: "Video Compression") {
             dismiss()
         })
         .background(
@@ -51,8 +58,8 @@ struct VideoCompressionView: View {
                 .fromHex(0xF2F3F8)
                 .edgesIgnoringSafeArea(.all)
         )
+#if os(iOS)
         .sheet(isPresented: $isShowingPhotoLibrary) {
-            #if os(iOS)
             ImagePicker{ url in
                 isShowingPhotoLibrary = false
                 guard let url = url else {
@@ -61,17 +68,46 @@ struct VideoCompressionView: View {
                 }
                 viewModel.onVideoSelected(url)
             }
-            #endif
         }
+#endif
         .onAppear {
             viewModel.onCompletion = {
                 dismiss()
             }
             Task {
                 try! await Task.sleep(seconds: 1)
-                isShowingPhotoLibrary = true
+                showVideoPicker()
             }
         }
+    }
+    
+    private func showVideoPicker() {
+        #if os(iOS)
+        showIOSPicker()
+        #elseif os(macOS)
+        showMacPicker()
+        #endif
+    }
+    
+    private func showIOSPicker() {
+        isShowingPhotoLibrary = true
+    }
+    
+    private func showMacPicker() {
+        #if os(macOS)
+        DispatchQueue.main.async {
+            let panel = NSOpenPanel()
+            panel.allowsMultipleSelection = false
+            panel.canChooseDirectories = false
+            panel.allowedContentTypes = [.movie]
+            if panel.runModal() == .OK {
+                debugPrint("Ok")
+                viewModel.onVideoSelected(panel.url!)
+            } else {
+                dismiss()
+            }
+        }
+        #endif
     }
 
     private func createBody() -> some View {
@@ -101,18 +137,19 @@ struct VideoCompressionView: View {
                 }
                    
                 createCompressButton()
+                    .padding(.bottom, 30)
             }
             .padding()
             .padding(.bottom)
             .background(
                 Color.white
-                    .cornerRadius(30, corners: [.topLeft, .topRight])
+                    .cornerRadius(30)
                     .shadow(color: Color.black.opacity(0.4), radius: 5, x: 2, y: 0)
             )
         }
+        .offset(x: 0, y: 30)
         .ignoresSafeArea()
     }
-    
     
     private func createBottomSheetContent(_ geometry: GeometryProxy) -> some View {
         print(geometry.size.width, geometry.size.height)
@@ -131,18 +168,23 @@ struct VideoCompressionView: View {
     }
     
     private func createCompressButton() -> some View{
-        Button("Compress") {
+        Button(action: {
             viewModel.compress()
+        }) {
+        
+            Text("Compress")
+                .frame(
+                    maxWidth: .infinity
+                )
+                .frame(height: 50)
+                .font(Font.subheadline.weight(.bold))
+                .background(LinearGradient(gradient: Gradient(colors: [.fromHex(0xFF48C6EF), .fromHex(0xFF6F86D6)]), startPoint: .leading, endPoint: .trailing))
+                .foregroundColor(Color.white)
+                .cornerRadius(30)
+                .contentShape(Rectangle())
         }
-        .frame(height: 50)
-        .frame(minWidth: 0, maxWidth: .infinity)
-        .foregroundColor(.white)
-        .background(LinearGradient(gradient: Gradient(colors: [.fromHex(0xFF48C6EF), .fromHex(0xFF6F86D6)]), startPoint: .leading, endPoint: .trailing))
-        .cornerRadius(30)
-        .contentShape(Rectangle())
         .shadow(color: Color.black.opacity(0.4), radius: 3, x: 2, y: 2)
-            
-
+        .buttonStyle(.plain)
     }
     
   
@@ -181,7 +223,7 @@ struct VideoCompressionView: View {
                 }
             }
         )
-        .keyboardType(.numberPad)
+//        .keyboardType(.numberPad)
     }
     
     private func createBitrateItem() -> VideoCompressionTextFieldItem {
@@ -202,6 +244,8 @@ struct VideoCompressionView: View {
         CircularContainerView(backgroundColor: .white) {
             Toggle("Enable Audio", isOn: $viewModel.isAudioEnabled)
                 .font(.title2)
+                .disabled(!viewModel.hasAudioStream)
+                .frame(maxWidth: .infinity)
         }
     }
     
@@ -273,7 +317,7 @@ struct VideoCompressionTextFieldItem : View {
             }
             
         )
-        .keyboardType(.numberPad)
+//        .keyboardType(.numberPad)
     }
 }
 

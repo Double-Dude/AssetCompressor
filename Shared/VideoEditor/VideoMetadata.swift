@@ -14,6 +14,7 @@ struct VideoMetadata {
     let fps: Int
     let duration: Double
     let size: Int64 // bytes
+    let hasAudio: Bool
 
     static func fromDict(_ dict:[String: Any]) -> Self? {
         let videoStream = getVideoStream(dict)
@@ -43,7 +44,8 @@ struct VideoMetadata {
             height: height,
             fps: fpsDividend/fpsDivisor,
             duration: Double(duration)!,
-            size: Int64(size)!
+            size: Int64(size)!,
+            hasAudio: getAudioStream(dict) != nil
         )
         
         return metadata
@@ -53,7 +55,14 @@ struct VideoMetadata {
         let streams = dict["streams"] as? [[String: Any]]
         return streams?.first { dict in
             dict["codec_type"] as? String == "video"
-        }!
+        }
+    }
+    
+    static func getAudioStream(_ dict:[String: Any]) -> [String: Any]? {
+        let streams = dict["streams"] as? [[String: Any]]
+        return streams?.first { dict in
+            dict["codec_type"] as? String == "audio"
+        }
     }
     
     static func getformat(_ dict:[String: Any]) -> [String: Any]? {

@@ -64,10 +64,18 @@
 		388C340327D61CBB00E13F62 /* libavfilter.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388C33F427D61CBA00E13F62 /* libavfilter.xcframework */; };
 		388C340427D61CBB00E13F62 /* ffmpegkit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388C33F527D61CBA00E13F62 /* ffmpegkit.xcframework */; };
 		388C340527D61CBB00E13F62 /* ffmpegkit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 388C33F527D61CBA00E13F62 /* ffmpegkit.xcframework */; };
+		38965A8727E89888009B7839 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38965A8627E89888009B7839 /* Platform.swift */; };
+		38965A8827E89888009B7839 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38965A8627E89888009B7839 /* Platform.swift */; };
 		38A0CC4527D0D78500B0F25A /* VideoMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0CC4427D0D78500B0F25A /* VideoMetadata.swift */; };
 		38A0CC4627D0D78500B0F25A /* VideoMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0CC4427D0D78500B0F25A /* VideoMetadata.swift */; };
 		38A0CC4927D0D81F00B0F25A /* JSON+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0CC4827D0D81F00B0F25A /* JSON+Extensions.swift */; };
 		38A0CC4A27D0D81F00B0F25A /* JSON+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0CC4827D0D81F00B0F25A /* JSON+Extensions.swift */; };
+		38B69B2227E5D8440098FBC0 /* FloatingLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383B904327D2240E0020C204 /* FloatingLabelTextField.swift */; };
+		38B69B2327E5D84E0098FBC0 /* TextFieldFloatingStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383B904127D21BD80020C204 /* TextFieldFloatingStyle.swift */; };
+		38B69B2427E5D8540098FBC0 /* VideoCompressionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383B904627D346E10020C204 /* VideoCompressionViewModel.swift */; };
+		38B69B2527E5D85B0098FBC0 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38467A7B27E49D7E00D1017B /* URL+Extensions.swift */; };
+		38B69B2627E5D86D0098FBC0 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386146E027E1DE7A00B6E9D2 /* ProgressView.swift */; };
+		38B69B6927E5F2B50098FBC0 /* FileLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383B904827D3566C0020C204 /* FileLocation.swift */; };
 		38E68F1A27C0445A00112A4B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E68F1927C0445A00112A4B /* MainView.swift */; };
 		38E68F1B27C0445A00112A4B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E68F1927C0445A00112A4B /* MainView.swift */; };
 		38E68F1D27C0450A00112A4B /* VideoEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E68F1C27C0450A00112A4B /* VideoEditor.swift */; };
@@ -137,6 +145,8 @@
 		388C33F327D61CBA00E13F62 /* libswscale.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libswscale.xcframework; sourceTree = "<group>"; };
 		388C33F427D61CBA00E13F62 /* libavfilter.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = libavfilter.xcframework; sourceTree = "<group>"; };
 		388C33F527D61CBA00E13F62 /* ffmpegkit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = ffmpegkit.xcframework; sourceTree = "<group>"; };
+		38965A8627E89888009B7839 /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
+		38965A8927E89E39009B7839 /* AssetCompressor (macOS)Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "AssetCompressor (macOS)Debug.entitlements"; sourceTree = "<group>"; };
 		38A0CC4427D0D78500B0F25A /* VideoMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoMetadata.swift; sourceTree = "<group>"; };
 		38A0CC4827D0D81F00B0F25A /* JSON+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+Extensions.swift"; sourceTree = "<group>"; };
 		38E68F1927C0445A00112A4B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -232,6 +242,7 @@
 		383E1AB927BE442500E06B99 = {
 			isa = PBXGroup;
 			children = (
+				38965A8927E89E39009B7839 /* AssetCompressor (macOS)Debug.entitlements */,
 				383B904A27D35DBD0020C204 /* AssetCompressor--iOS--Info.plist */,
 				383E1ABE27BE442500E06B99 /* Shared */,
 				383E1ACD27BE442600E06B99 /* macOS */,
@@ -347,6 +358,7 @@
 				383B904D27D39A310020C204 /* WindowExtensions.swift */,
 				385A61FE27E34714008E9862 /* Task+Extensions.swift */,
 				38467A7B27E49D7E00D1017B /* URL+Extensions.swift */,
+				38965A8627E89888009B7839 /* Platform.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -594,6 +606,7 @@
 				38E68F1D27C0450A00112A4B /* VideoEditor.swift in Sources */,
 				38302B8127C08A3500EA55E4 /* FFmpegCommandBuilder.swift in Sources */,
 				382EDD1827C1D5A0001D9D0A /* Color+Extensions.swift in Sources */,
+				38965A8727E89888009B7839 /* Platform.swift in Sources */,
 				382EDD2D27C50989001D9D0A /* NavigationBar.swift in Sources */,
 				38A0CC4527D0D78500B0F25A /* VideoMetadata.swift in Sources */,
 				38302B8427C09ED600EA55E4 /* FFmpegCommandFactory.swift in Sources */,
@@ -622,20 +635,27 @@
 				38E68F2127C047E800112A4B /* FFmpegVideoCompressor.swift in Sources */,
 				38E68F1E27C0450A00112A4B /* VideoEditor.swift in Sources */,
 				38302B8227C08A3500EA55E4 /* FFmpegCommandBuilder.swift in Sources */,
+				38B69B2227E5D8440098FBC0 /* FloatingLabelTextField.swift in Sources */,
+				38B69B2627E5D86D0098FBC0 /* ProgressView.swift in Sources */,
+				38B69B2527E5D85B0098FBC0 /* URL+Extensions.swift in Sources */,
 				382EDD1927C1D5A0001D9D0A /* Color+Extensions.swift in Sources */,
 				382EDD2E27C50989001D9D0A /* NavigationBar.swift in Sources */,
+				38B69B2427E5D8540098FBC0 /* VideoCompressionViewModel.swift in Sources */,
 				385A620027E34714008E9862 /* Task+Extensions.swift in Sources */,
 				38A0CC4627D0D78500B0F25A /* VideoMetadata.swift in Sources */,
 				383B904F27D39A310020C204 /* WindowExtensions.swift in Sources */,
 				38302B8527C09ED600EA55E4 /* FFmpegCommandFactory.swift in Sources */,
 				382EDD2B27C3BB23001D9D0A /* VideoCompressionView.swift in Sources */,
 				382EDD2227C368D7001D9D0A /* MainMenuItem.swift in Sources */,
+				38965A8827E89888009B7839 /* Platform.swift in Sources */,
 				383E1AEA27BE442600E06B99 /* ContentView.swift in Sources */,
 				38E68F1B27C0445A00112A4B /* MainView.swift in Sources */,
 				38A0CC4A27D0D81F00B0F25A /* JSON+Extensions.swift in Sources */,
+				38B69B6927E5F2B50098FBC0 /* FileLocation.swift in Sources */,
 				382EDD2527C3712D001D9D0A /* SwiftUIView+Extensions.swift in Sources */,
 				382EDD1F27C3658F001D9D0A /* ImagePicker.swift in Sources */,
 				382EDD1C27C249EF001D9D0A /* SwiftUITestView.swift in Sources */,
+				38B69B2327E5D84E0098FBC0 /* TextFieldFloatingStyle.swift in Sources */,
 				383E1AE827BE442600E06B99 /* AssetCompressorApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -860,7 +880,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "AssetCompressor (macOS)Debug.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;

@@ -18,7 +18,6 @@ class FFmpegVideoCompressor : VideoEditor {
     func getMetadata(_ url: URL) async throws -> VideoMetadata {
         let command = "-loglevel 0 -print_format json -show_format -show_streams \(url.path)"
         let result = FFprobeKit.execute(command)
-        FFprobeKit.getMediaInformation(url.path).getMediaInformation()
         let jsonDict = JSONSerialization.convertToDictionary(result!.getOutput())
         if jsonDict == nil || jsonDict!.isEmpty {
             throw FFmpegVideoCompressorError.unexpectedError("Unable to parse json: \(String(describing: jsonDict))")

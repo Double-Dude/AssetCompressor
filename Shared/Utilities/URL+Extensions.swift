@@ -8,10 +8,15 @@
 import Foundation
 
 extension URL {
-    func appendingToPathBeforeExtension(_ name: String) -> URL {
+    func appendingToFileName(_ name: String) -> URL {
         let pathExtension = self.pathExtension
         let url = self.deletingPathExtension()
         let outputPath = url.path + name + "." + pathExtension
         return URL.init(fileURLWithPath: outputPath)
+    }
+    
+    func replaceExtension(_ extensionName: String) -> URL {
+        let newURL = self.deletingPathExtension().appendingPathExtension(extensionName)
+        return newURL
     }
 }

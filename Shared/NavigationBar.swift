@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct NavigationBar: View {
+    let title: String
     var onBackButtonTapped: (() -> Void)?
+    @State private var isBackButtonPressed = false
     
     var body: some View {
         ZStack {
@@ -20,15 +22,15 @@ struct NavigationBar: View {
                     Image(systemName: "arrow.backward")
                         .resizable()
                         .scaledToFit()
-                        .foregroundColor(Color.black)
+                        .foregroundColor(isBackButtonPressed ? Color.black.opacity(0.6) : Color.black)
                         .frame(width: 25, height: 25, alignment: .leading)
-//
-//                        .frame(width: 50, height: 50, alignment: .leading)
-//                        .foregroundColor(Color.black)
                 }
-                
-                
-                Text("NavigationBar")
+                .onPressedGesture(callback: { isPressed in
+                    isBackButtonPressed = isPressed
+                })
+                .buttonStyle(.plain)
+
+                Text(title)
                     .font(.largeTitle)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
@@ -42,6 +44,6 @@ struct NavigationBar: View {
 
 struct NavigationBar_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationBar()
+        NavigationBar(title: "NavigationBar")
     }
 }
